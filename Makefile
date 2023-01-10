@@ -16,7 +16,8 @@ NAME = fdf
 HEADER = $(NAME).h
 
 SRC =	fdf.c
-		
+
+FLAGS = # -Wall -Wextra -Werror	
 	
 OBJ = $(addprefix obj/,$(SRC:.c=.o))
 
@@ -33,7 +34,7 @@ $(NAME): libft/libft.a $(OBJ)
 	cc $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -L ./libft -lft -o $(NAME)
 
 obj/%.o : src/%.c $(HEADER) Makefile
-		cc -c -Wall -Wextra -Werror $< -o $@ -I mlx -I.
+		cc -c ${FLAGS} $< -o $@ -I mlx -I.
 
 create_obj_folder :
 	mkdir -p obj
