@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 06:15:40 by bajeanno          #+#    #+#             */
-/*   Updated: 2023/01/09 22:17:07 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/11 21:32:06 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,24 @@ typedef struct	s_map {
 	int		height;
 }				t_map;
 
+typedef struct	s_win {
+	void	*mlx;
+	void	*win;
+	int		width;
+	int		height;
+}				t_win;
+
+typedef struct	s_p {
+	int		x;
+	int		y;
+}				t_p;
+
+typedef struct	s_p_double {
+	double	x;
+	double	y;
+}				t_p_double;
+
+t_map			*get_map(char *map_file);
+void			print_map(t_map *map); //debug
+void			draw_center(t_win *win);
 #endif

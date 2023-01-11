@@ -6,150 +6,129 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 04:09:20 by bajeanno          #+#    #+#             */
-/*   Updated: 2023/01/10 18:24:09 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/11 23:50:17 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h> //debug
 
-static void		cpy_splits_into_map_line(char **splits, int *map_line);
+static void	display_line(t_map *map, int line, t_win *win, int line_pos, t_p spacing);
+static void	display_map(t_map *map, t_win *win);
+static t_win	*win_init(int height, int width, char *window_title);
+static	void	put_pixel(int x, int y, t_win *win);
 
-int				how_many_lines(int fd);
-static void		print_map(t_map *map);
-static int		malloc_map(t_map **map, int width, int height);
-static t_map	*parse_map(int fd);
-static void		str_to_map(char *str, int fd, char **splits, t_map *map);
-
-static char	*file_to_str(int fd);
+/* TODO 
+	OK - 1) s'adapter a l'ecran en largeur/hauteur
+	2) tracer des lignes entres les points
+	3) projeter de maniere isometrique
+ */
 
 int	main(int argc, char **argv)
 {
-	void	*mlx;
-	void	*win;
-	t_data	img;
-	int		fd;
+	t_win	*win;
 	t_map	*map;
 
-	// if (argc != 2)
-	// 	return (0);
-	fd = open(argv[1], O_RDONLY);
-	map = parse_map(fd);
-	close(fd);
-	ft_printf("f1\n"); //debug
-	mlx = mlx_init();
-	ft_printf("f1\n"); //debug
-	img.img = mlx_new_image(mlx, 400, 400);
-	win = mlx_new_window(mlx, 400, 400, "Carré noir");
-	// mlx_pixel_put();
-	mlx_loop(mlx);
+	if (argc != 2)
+		return (0);
+
+	map = get_map(argv[1]);
+	
+	win = win_init(1000, 1500, "fdf");
+	if (!win)
+		return (-1);//...
+	// print_map(map);
+	draw_center(win);
+	
+	display_map(map, win);
+	
+	mlx_loop(win->mlx);
+	free(win); // a mettre dans une sous fonction qui libere tout a l'interieur
 	return (0);
 }
 
-static void	error(void)
+static t_win	*win_init(int height, int width, char *window_title)
 {
-	ft_printf("Error\n");
+	t_win	*res;
+	void	*mlx;
+	void	*win;
+	t_data	img;
+
+	res = malloc(sizeof(t_win));
+	if (!res)
+		return (NULL);
+
+	mlx = mlx_init();
+	if (!mlx)
+		return (NULL); // il faut free des trucs en partant !
+		
+	img.img = mlx_new_image(mlx, width, height);
+	win = mlx_new_window(mlx, width, height, window_title);
+
+	res->mlx = mlx;
+	res->win = win;
+	res->width = width;
+	res->height = height;
+	return (res);
 }
 
-static t_map	*parse_map(int fd)
-{
-	char	**splits;
-	t_map	*map;
-	char	*str;
-	int		height;
-
-	str = file_to_str(fd);
-	map = NULL;
-	height = how_many_splits(str, '\n', NULL);
-	splits = ft_split(str, '\n');
-	if (!malloc_map(&map, 0, height))
-		return (0);
-	map->height = height;
-	str_to_map(str, fd, splits, map);
-	ft_printf("exiting parse_map\n");
-	return (map);
-}
-
-static void	str_to_map(char *str, int fd, char **splits, t_map *map)
-{
-	int		width;
-	int		height;
-
-	height = 0;
-	while (height < map->height)
-	{
-		if (map->width == 0)
-			map->width = how_many_splits(splits[height], ' ', NULL);
-		else
-			if (map->width != how_many_splits(splits[height], ' ', NULL))
-				error();
-		cpy_splits_into_map_line(ft_split(splits[height], ' '), map->map[height]);
-		height++;
-	}
-}
-
-static void	cpy_splits_into_map_line(char **splits, int *map_line)
-{
-	while (*splits)
-	{
-		*map_line = ft_atoi(*splits);
-		map_line++;
-		splits++;
-	}
-}
-static char	*file_to_str(int fd)
-{
-	char	*str;
-	char	*new_str;
-	char	*next_line;
-
-	new_str = NULL;
-	str = NULL;
-	next_line = get_next_line(fd);
-	while (next_line)
-	{
-		new_str = ft_strjoin(str, next_line);
-		if (!new_str)
-		{
-			if (str)
-				free(str);
-			if (next_line)
-				free(next_line);
-			return (NULL);
-		}
-		free(str);
-		str = new_str;
-		free(next_line);
-		next_line = get_next_line(fd);
-	}
-	return (str);
-}
-
-static int	malloc_map(t_map **map, int width, int height)
+static void	display_map(t_map *map, t_win *win)
 {
 	int	i;
-
+	t_p	spacing;
+	
+	spacing.y =(win->height /(map->height));
+	ft_printf("win->width : %d\n", win->width); //debug
+	ft_printf("map->width : %d\n", map->width); //debug
+	ft_printf("spacing_y : %d\n", spacing.y); //debug
+	spacing.x = win->width /(map->width);
+	ft_printf("spacing_x : %d\n", spacing.x); //debug
 	i = 0;
-	(*map) = malloc(sizeof(t_map));
-	if (!(*map))
-		return (0);
-	(*map)->map = malloc(sizeof(int *) * height);
-	if (!(*map)->map)
-		return (0);
-	while (i < height)
+	while (i < map->height)
 	{
-		(*map)->map[i] = malloc(sizeof(int) * width);
-		if (!(*map)->map[i])
-			return (ft_freetab((void **)((*map)->map), i), 0);
-		i++;
+		display_line(map, i, win, (i)*spacing.y, spacing);
+		i ++;
 	}
-	(*map)->height = height;
-	(*map)->width = width;
-	return (1);
 }
-static	void	print_map(t_map *map)
+
+
+static void		display_line(t_map *map, int line, t_win *win, int line_pos, t_p spacing)
 {
-	return ;
+	int	i;
+	int	j;
+	t_p	offset;
+	t_p	p;
+	
+	
+	offset.x = spacing.x /2; //(win->width)/2  - ((map->width - 1) * spacing_x)/2 ; //   
+	offset.y = spacing.y /2;// (win->height)/2 - ((map->height - 1) * spacing_y)/2;//  
+	j = line_pos;
+	i = 0;
+	while (i < map->width)
+	{
+		p.x = (i * spacing.x) + offset.x;
+		p.y = j + offset.y;
+		
+		put_pixel(p.x, p.y, win);
+		i++;	
+	}
+}
+
+static	void	put_pixel(int x, int y, t_win *win)
+{
+	if (x < win->width && y < win->height )
+		mlx_pixel_put(win->mlx, win->win, x, y, 0xFFFFFFF);
+	else
+		ft_printf("OUTBOUND [x:%d][y:%d]\n", x, y); //debug
+}
+
+
+/* stativ void	display_point(int x, int y)
+{
+	
+}
+
+static	void	display_map(t_map *map)
+{
 	int	i;
 	int	j;
 
@@ -178,4 +157,4 @@ static	void	print_map(t_map *map)
 			}		
 		}
 	}
-}
+} */
