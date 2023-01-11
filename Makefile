@@ -15,13 +15,16 @@ NAME = fdf
 
 HEADER = $(NAME).h
 
-SRC =	fdf.c
+SRC =	fdf.c \
+		get_map.c \
+		print_map.c \
+		draw_center.c
 
 FLAGS = # -Wall -Wextra -Werror	
 	
 OBJ = $(addprefix obj/,$(SRC:.c=.o))
 
-FSANITIZE = -fsanitize=address
+FSAN = -fsanitize=address
 
 all	: create_obj_folder
 	make -C libft
@@ -31,10 +34,10 @@ all	: create_obj_folder
 	@make end_message
 
 $(NAME): libft/libft.a $(OBJ)
-	cc $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -L ./libft -lft -o $(NAME)
+	cc $(OBJ) $(FSAN) -g3 -Lmlx -lmlx -framework OpenGL -framework AppKit -L ./libft -lft -o $(NAME)
 
 obj/%.o : src/%.c $(HEADER) Makefile
-		cc -c ${FLAGS} $< -o $@ -I mlx -I.
+		cc -c -g3 ${FLAGS} $< -o $@ -I mlx -I.
 
 create_obj_folder :
 	mkdir -p obj
