@@ -34,7 +34,7 @@ all	: create_obj_folder
 	@make end_message
 
 $(NAME): libft/libft.a $(OBJ)
-	cc $(OBJ) $(FSAN) -g3 -Lmlx -lmlx -framework OpenGL -framework AppKit -L ./libft -lft -o $(NAME)
+	cc $(OBJ) $(FSAN) -g3 -Lmlx -lmlx -framework OpenGL -framework AppKit -L ./libft -lft -lm -o $(NAME)
 
 obj/%.o : src/%.c $(HEADER) Makefile
 		cc -c -g3 ${FLAGS} $< -o $@ -I mlx -I.

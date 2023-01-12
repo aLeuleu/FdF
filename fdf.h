@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 06:15:40 by bajeanno          #+#    #+#             */
-/*   Updated: 2023/01/11 21:32:06 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/12 15:30:21 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,16 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
+typedef struct	s_p3d {
+	int		x;
+	int		y;
+	int		z;
+}				t_p3d;
+
 typedef struct	s_map {
-	int		**map;
-	int		width;
-	int		height;
+	t_p3d	**map;
+	int		column;
+	int		line;
 }				t_map;
 
 typedef struct	s_win {
@@ -41,10 +47,9 @@ typedef struct	s_p {
 	int		y;
 }				t_p;
 
-typedef struct	s_p_double {
-	double	x;
-	double	y;
-}				t_p_double;
+
+
+
 
 t_map			*get_map(char *map_file);
 void			print_map(t_map *map); //debug

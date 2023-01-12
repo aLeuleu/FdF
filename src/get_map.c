@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:45:25 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/11 18:12:05 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/12 17:48:41 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ static t_map	*get_sample_map() //debug
 	t_map	*res;
 
 	res = malloc(sizeof(t_map));
-	res->height = 4;
-	res->width = 4;
-	res->map = malloc(sizeof(int *) * res->height);
+	res->line = 4;
+	res->column = 4;
+	res->map = malloc(sizeof(int *) * res->line);
 	for (int i = 0 ; i < 4; i++)
 	{
-		res->map[i] = malloc(sizeof(int) * res->width);
+		res->map[i] = malloc(sizeof(int) * res->column);
 		for (int j = 0; j < 4; j ++)
-			res->map[i][j] = j*i;
+			res->map[i][j].z = j*i;
 	}
 	print_map(res);
 	return (res);
@@ -60,15 +60,15 @@ static t_map	*parse_map(int fd)
 	char	**splits;
 	t_map	*map;
 	char	*str;
-	int		height;
+	int		lines;
 
 	str = file_to_str(fd);
 	map = NULL;
-	height = how_many_splits(str, '\n', NULL);
+	lines = how_many_splits(str, '\n', NULL);
 	splits = ft_split(str, '\n');
-	if (!malloc_map(&map, how_many_splits(splits[0], ' ', NULL), height))
+	if (!malloc_map(&map, how_many_splits(splits[0], ' ', NULL), lines))
 		return (0);
-	map->height = height;
+	map->line = lines;
 	str_to_map(str, fd, splits, map);
 	return (map);
 }
@@ -80,12 +80,12 @@ static void	str_to_map(char *str, int fd, char **splits, t_map *map)
 
 	height = 0;
 
-	while (height < map->height)
+	while (height < map->line)
 	{
-		if (map->width == 0)
-			map->width = how_many_splits(splits[height], ' ', NULL);
+		if (map->column == 0)
+			map->column = how_many_splits(splits[height], ' ', NULL);
 		else
-			if (map->width != how_many_splits(splits[height], ' ', NULL))
+			if (map->column != how_many_splits(splits[height], ' ', NULL))
 				error();
 		// ft_printf("splits[%d] : %s\n", height, splits[height]); //debug
 		cpy_splits_into_map_line(ft_split(splits[height], ' '), map, height);
@@ -93,10 +93,8 @@ static void	str_to_map(char *str, int fd, char **splits, t_map *map)
 		// ft_printf("(control) height : %d\n", height);  //debug
 		// for (int i_w = 0; i_w < map->width; i_w++)
 		// 	ft_printf("map->map[0][%d] : %d (%p)\n", i_w, map->map[0][i_w], &(map->map[0][i_w]) - &(map->map[0][0])); //debug
-
 		height++;
 	}
-
 }
 
 static void	cpy_splits_into_map_line(char **splits, t_map *map, int height)
@@ -105,9 +103,9 @@ static void	cpy_splits_into_map_line(char **splits, t_map *map, int height)
 
 	i = 0;
 	// ft_printf("(cpying .. )height : %d\n", height); //debug
-	while (i < map->width)						// SIG_ABORT if width < 5 && fsan is off !???!...
+	while (i < map->column)
 	{
-		map->map[height][i] = ft_atoi(splits[i]);
+		map->map[height][i].z = ft_atoi(splits[i]);
 		// ft_printf("\tmap->map[%d][%d] : %d (%p)\n", height, i, (map->map[height][i]), &(map->map[height][i]) - &(map->map[0][0])); //debug
 		i ++;
 	}
@@ -149,19 +147,19 @@ static int	malloc_map(t_map **map, int width, int height)
 	(*map) = malloc(sizeof(t_map));
 	if (!(*map))
 		return (error(),0);
-	(*map)->map = malloc(sizeof(int *) * height);
+	(*map)->map = malloc(sizeof(t_p3d *) * height);
 	if (!(*map)->map)
 		return (error(),0);
 
 	while (i < height)
 	{
-		(*map)->map[i] = malloc(sizeof(int) * width);
+		(*map)->map[i] = malloc(sizeof(t_p3d) * width);
 		if (!(*map)->map[i])
 			return (error(),ft_freetab((void **)((*map)->map), i), 0);
 		i++;
 	}
-	(*map)->height = height;
-	(*map)->width = width;
+	(*map)->line = height;
+	(*map)->column = width;
 	// ft_printf("height : %d\n", height); //debug	
 	// ft_printf("width : %d\n", width); //debug
 	// for (size_t i = 0; i < (*map)->height; i++)
