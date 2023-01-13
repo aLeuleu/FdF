@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 04:09:20 by bajeanno          #+#    #+#             */
-/*   Updated: 2023/01/12 19:35:37 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/13 14:58:56 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@ t_p				projection_iso(t_p3d *p3d);
 static void		compute_map_x_y_coords(t_map *map, t_p spacing);
 
 
-/* TODO 
-	OK - 1) s'adapter a l'ecran en largeur/hauteur
-	OK - 2) tracer des lignes entres les points
-	- parser les points de la map sous forme de points 3D
-	- tracer des lignes entres les points de la map (sans calculer les points, ils existent deja)
-	3) projeter de maniere isometrique
- */
 
 int	main(int argc, char **argv)
 {
@@ -48,7 +41,7 @@ int	main(int argc, char **argv)
 	if (!win)
 		return (-1);//...
 	// print_map(map);
-	draw_center(win);
+	// draw_center(win);
 	spacing.y =(win->height /(map->line)) * 0.5;
 	spacing.x = win->width /(map->column) * 0.5;
 	ft_printf("win->width : %d\n", win->width); //debug
@@ -94,7 +87,7 @@ static void	display_map(t_map *map, t_win *win)
 {
 	int	i;
 	i = 0;
-	while (i < map->line - 1)
+	while (i < map->line)
 	{
 		display_map_line(map, i, win);
 		i ++;
@@ -118,7 +111,7 @@ static void		compute_map_x_y_coords(t_map *map, t_p spacing)
 			
 			map->map[line][column].x = (column * spacing.x) + offset.x;
 			map->map[line][column].y = line * spacing.y + offset.y;
-			map->map[line][column].z *= 3;
+			map->map[line][column].z *= -3;
 			column ++;
 		}
 		line ++;
@@ -137,11 +130,19 @@ static void		display_map_line(t_map *map, int line, t_win *win)
 	{
 		p = projection_iso(&(map->map[line][i]));
 		next = projection_iso(next_tab_element(map, i , line));
+		ft_printf("line : %d\n", line); //debug
+		
 		if (i != map->column - 1)
+		{
+			ft_printf("colonne : %d\n", i); //debug
+			ft_printf("drawing p(%d)->n(%d)\n", map->map[line][i].z, next_tab_element(map, i , line)->z ); //debug
 			draw_line2(p , next, win);
-		next = projection_iso(&(map->map[line + 1][i]));
+		}
 		if (line != map->line - 1)
+		{
+			next = projection_iso(&(map->map[line + 1][i]));
 			draw_line2(p , next, win);
+		}
 		i++;	
 	}
 }
@@ -162,8 +163,12 @@ t_p	projection_iso(t_p3d *p3d)
 {
 	t_p res;
 	
-	res.x = -0.7071 * (p3d->x - p3d->y);
-	res.y = -0.8164 * p3d->z - ((0.4082)*(p3d->x + p3d->y));
+	res.x = 0;
+	res.y = 0;
+	if (!p3d)
+		return (res);
+	res.x = 0.7071 * (p3d->x - p3d->y);
+	res.y = 0.8164 * p3d->z - ((-0.4082)*(p3d->x + p3d->y));
 	return (res);
 }
 
@@ -184,16 +189,16 @@ void	draw_line(int x0, int y0, int x1, int y1, t_win *win)
 
 void	draw_line2(t_p p0, t_p p1, t_win *win)
 {
-	ft_printf("p0.x : %d\n", p0.x); //debug
+/* 	ft_printf("p0.x : %d\n", p0.x); //debug
 	ft_printf("p0.y : %d\n", p0.y); //debug
 	ft_printf("p1.x : %d\n", p1.x); //debug
-	ft_printf("p1.y : %d\n", p1.y); //debug
+	ft_printf("p1.y : %d\n", p1.y); //debug */
 	int dx = abs(p1.x-p0.x), sx = p0.x < p1.x ? 1 : -1;
 	int dy = abs(p1.y-p0.y), sy = p0.y < p1.y ? 1 : -1; 
 	int err = (dx>dy ? dx : -dy)/2, e2;
 
  	for(;;){
-		put_pixel(p0.x +600, p0.y + 600, win);
+		put_pixel(p0.x +500, p0.y +200, win);
 		if (p0.x==p1.x && p0.y==p1.y) break;
 		e2 = err;
 		if (e2 >-dx) { err -= dy; p0.x += sx; }
