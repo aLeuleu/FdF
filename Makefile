@@ -15,10 +15,21 @@ NAME = fdf
 
 HEADER = $(NAME).h
 
-SRC =	fdf.c \
+SRC =	display_map.c \
+		draw_center.c \
+		fdf.c \
 		get_map.c \
+		next_tab_element.c \
 		print_map.c \
-		draw_center.c
+		iso_projection.c \
+		draw_line.c \
+		put_pixel.c \
+		draw_cross.c \
+		get_win_center.c \
+		get_offset.c \
+		add_points.c \
+
+
 
 FLAGS = # -Wall -Wextra -Werror	
 
@@ -40,9 +51,10 @@ OS := $(shell uname)
 
 
 all	: create_obj_folder
-	make -C libft
-	make -C $(MLX)
-	cp $(MLX)/$(MLX_LIB) ./$(MLX_LIB)
+	@make -C libft
+	@make -C $(MLX)
+	@cp $(MLX)/$(MLX_LIB) ./$(MLX_LIB)
+	@clear
 	make $(NAME)
 	@make end_message
 
@@ -77,6 +89,7 @@ run:
 	./$(NAME) $(ARG)
 
 end_message:
+	@clear
 	@echo "Done !"
 
 .PHONY: all clean fclean re create_obj_folder end_message

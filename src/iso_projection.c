@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_center.c                                      :+:      :+:    :+:   */
+/*   iso_projection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 21:28:31 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/13 16:58:50 by alevra           ###   ########lyon.fr   */
+/*   Created: 2023/01/13 16:08:56 by alevra            #+#    #+#             */
+/*   Updated: 2023/01/13 16:26:22 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_center(t_win *win)		//debug
+t_p	iso_projection(t_p3d *p3d)
 {
-
-	for (size_t i = 0; i < win->width; i++)
-		mlx_pixel_put(win->mlx, win->win, i, (win->height)/2 , 0x606060);
-
-	for (size_t i = 0; i < win->height; i++)
-		mlx_pixel_put(win->mlx, win->win, win->width /2, i , 0x606060);
-
+	t_p res;
+	
+	res.x = 0;
+	res.y = 0;
+	if (!p3d)
+		return (res);
+	res.x = 0.7071 * (p3d->x - p3d->y);
+	res.y = 0.8164 * p3d->z - ((-0.4082)*(p3d->x + p3d->y));
+	return (res);
 }

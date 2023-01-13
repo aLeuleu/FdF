@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_center.c                                      :+:      :+:    :+:   */
+/*   get_win_center.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 21:28:31 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/13 16:58:50 by alevra           ###   ########lyon.fr   */
+/*   Created: 2023/01/13 17:09:35 by alevra            #+#    #+#             */
+/*   Updated: 2023/01/13 17:11:27 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_center(t_win *win)		//debug
+t_p		get_win_center(t_win	*win)
 {
+	t_p	center;
 
-	for (size_t i = 0; i < win->width; i++)
-		mlx_pixel_put(win->mlx, win->win, i, (win->height)/2 , 0x606060);
-
-	for (size_t i = 0; i < win->height; i++)
-		mlx_pixel_put(win->mlx, win->win, win->width /2, i , 0x606060);
-
+	center.x = win->width/2;
+	center.y = win->height/2;
+	return (center);
 }

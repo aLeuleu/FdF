@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_center.c                                      :+:      :+:    :+:   */
+/*   next_tab_element.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 21:28:31 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/13 16:58:50 by alevra           ###   ########lyon.fr   */
+/*   Created: 2023/01/13 16:10:20 by alevra            #+#    #+#             */
+/*   Updated: 2023/01/13 16:10:31 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_center(t_win *win)		//debug
+t_p3d	*next_tab_element(t_map *map, int column, int line)
 {
-
-	for (size_t i = 0; i < win->width; i++)
-		mlx_pixel_put(win->mlx, win->win, i, (win->height)/2 , 0x606060);
-
-	for (size_t i = 0; i < win->height; i++)
-		mlx_pixel_put(win->mlx, win->win, win->width /2, i , 0x606060);
-
+	if (!(line < map->line && column < map->column))
+		return (NULL);
+	if (column != map->column -1)
+		return (&(map->map[line][column +1]));
+	else
+		if (line != map->line -1)
+			return (&(map->map[line +1][0]));
+	return (NULL);
 }

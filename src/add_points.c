@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_center.c                                      :+:      :+:    :+:   */
+/*   add_points.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 21:28:31 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/13 16:58:50 by alevra           ###   ########lyon.fr   */
+/*   Created: 2023/01/13 17:18:55 by alevra            #+#    #+#             */
+/*   Updated: 2023/01/13 17:20:35 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_center(t_win *win)		//debug
+t_p	add_points(t_p p1, t_p p2)
 {
+	t_p res;
 
-	for (size_t i = 0; i < win->width; i++)
-		mlx_pixel_put(win->mlx, win->win, i, (win->height)/2 , 0x606060);
-
-	for (size_t i = 0; i < win->height; i++)
-		mlx_pixel_put(win->mlx, win->win, win->width /2, i , 0x606060);
-
+	res.x = p1.x + p2.x;
+	res.y = p1.y + p2.y;
+	return (res);
 }

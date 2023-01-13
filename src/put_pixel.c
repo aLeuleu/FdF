@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_center.c                                      :+:      :+:    :+:   */
+/*   put_pixel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 21:28:31 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/13 16:58:50 by alevra           ###   ########lyon.fr   */
+/*   Created: 2023/01/13 16:22:38 by alevra            #+#    #+#             */
+/*   Updated: 2023/01/13 17:24:32 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_center(t_win *win)		//debug
+void	put_pixel(int x, int y, t_win *win)
 {
-
-	for (size_t i = 0; i < win->width; i++)
-		mlx_pixel_put(win->mlx, win->win, i, (win->height)/2 , 0x606060);
-
-	for (size_t i = 0; i < win->height; i++)
-		mlx_pixel_put(win->mlx, win->win, win->width /2, i , 0x606060);
-
+	if (x < win->width && y < win->height )
+		mlx_pixel_put(win->mlx, win->win, x, y, 0xFFFFFF);
+	else
+		ft_printf("."); //debug
+		// ft_printf("OUTBOUND [x:%d][y:%d]\n", x, y); //debug
 }
