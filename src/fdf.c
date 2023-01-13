@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 04:09:20 by bajeanno          #+#    #+#             */
-/*   Updated: 2023/01/13 17:55:47 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/13 17:59:38 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ static void		compute_map_x_y_coords(t_map *map, t_p spacing)
 		{
 			map->map[line][column].x = (column * spacing.x) ;
 			map->map[line][column].y = line * spacing.y ;
-			map->map[line][column].z *= -3;
+			map->map[line][column].z *= -4;
 			column ++;
 		}
 		line ++;
