@@ -21,23 +21,36 @@ SRC =	fdf.c \
 		draw_center.c
 
 FLAGS = # -Wall -Wextra -Werror	
+
+ifeq ($(OS),Darwin)
+  MLX = mlx_macos
+  MLX_LIB = libmlx.dylib
+  MLX_FLAGS = -L$(MLX) -lmlx -framework OpenGL -framework AppKit
+else
+  MLX = mlx_linux
+  MLX_LIB = libmlx.a
+  MLX_FLAGS = -L$(MLX) -lmlx -lXext -lX11
+endif
 	
 OBJ = $(addprefix obj/,$(SRC:.c=.o))
 
 FSAN = -fsanitize=address
 
+OS := $(shell uname)
+
+
 all	: create_obj_folder
 	make -C libft
-	make -C mlx
-	cp mlx/libmlx.dylib ./libmlx.dylib
+	make -C $(MLX)
+	cp $(MLX)/$(MLX_LIB) ./$(MLX_LIB)
 	make $(NAME)
 	@make end_message
 
 $(NAME): libft/libft.a $(OBJ)
-	cc $(OBJ) $(FSAN) -g3 -Lmlx -lmlx -framework OpenGL -framework AppKit -L ./libft -lft -lm -o $(NAME)
+	cc $(OBJ) $(FSAN) $(MLX_FLAGS) -g3  -L ./libft -lft -lm -o $(NAME)
 
 obj/%.o : src/%.c $(HEADER) Makefile
-		cc -c -g3 ${FLAGS} $< -o $@ -I mlx -I.
+		cc -c -g3 ${FLAGS} $< -o $@ -I $(MLX) -I.
 
 create_obj_folder :
 	mkdir -p obj
