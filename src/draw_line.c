@@ -6,27 +6,39 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 16:20:56 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/13 16:21:19 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/14 12:59:22 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void			draw_line(int x1, int x2, int y1, int y2, t_win *win);
+void			draw_line(t_p a, t_p b, t_win *win);
 void			draw_line2(t_p start, t_p end, t_win *win);
 
-void	draw_line(int x0, int y0, int x1, int y1, t_win *win)
+static int	max(int a, int b)
 {
-	int dx = abs(x1-x0), sx = x0<x1 ? 1 : -1;
-	int dy = abs(y1-y0), sy = y0<y1 ? 1 : -1; 
-	int err = (dx>dy ? dx : -dy)/2, e2;
+	if (a > b)
+		return (a);
+	return (b);
+}
 
- 	for(;;){
-		put_pixel(x0,y0, win);
-		if (x0==x1 && y0==y1) break;
-		e2 = err;
-		if (e2 >-dx) { err -= dy; x0 += sx; }
-		if (e2 < dy) { err += dx; y0 += sy; }
+void	draw_line(t_p a, t_p b, t_win *win)
+{
+	int        i;
+	int        steps;
+	float    x;
+	float    y;
+
+	steps = max(abs(b.x - a.x), abs(b.x - a.x));
+	x = a.x;
+	y = a.y;
+	i = 0;
+	while (i <= steps)
+	{
+		put_pixel(x, y , win);
+		x += (b.x - a.x) / (float)steps;
+		y += (b.y - a.y) / (float)steps;
+		i++;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 04:09:20 by bajeanno          #+#    #+#             */
-/*   Updated: 2023/01/13 17:59:38 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/14 18:26:33 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int argc, char **argv)
 
 	map = get_map(argv[1]);
 	
-	win = win_init(1200, 2000, "fdf");
+	win = win_init(1000, 1600, "fdf");
 	if (!win)
 		return (-1);//...
 	spacing.y =(win->height /(map->line)) *0.7 ;
