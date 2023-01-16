@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_pixel.c                                        :+:      :+:    :+:   */
+/*   close_windows.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/13 16:22:38 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/16 17:31:39 by alevra           ###   ########lyon.fr   */
+/*   Created: 2023/01/16 17:34:07 by alevra            #+#    #+#             */
+/*   Updated: 2023/01/16 17:34:44 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	put_pixel(int x, int y, t_win *win)
+int    close_window(t_win *win)
 {
-	if (x < win->width && y < win->height )
-		mlx_pixel_put(win->mlx, win->win, x, y, 0xFFFFFF);
-	else
-		ft_printf("."); //debug
-		// ft_printf("OUTBOUND [x:%d][y:%d]\n", x, y); //debug
+    mlx_destroy_window(win->mlx, win->win);
+    free(win);
+    exit(0);
+    return (0);
 }

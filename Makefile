@@ -34,6 +34,7 @@ SRC_BONUS = draw_tile.c	\
 
 FLAGS = # -Wall -Wextra -Werror	
 
+OS := $(shell uname)
 ifeq ($(OS),Darwin)
   MLX = mlx_macos
   MLX_LIB = libmlx.dylib
@@ -49,12 +50,11 @@ OBJ_BONUS = $(addprefix obj/,$(SRC_BONUS:.c=.o))
 
 FSAN = -fsanitize=address
 
-OS := $(shell uname)
 
 
 all	: create_obj_folder
 	@make -C libft
-	@make -C $(MLX)
+	make -C $(MLX)
 	@cp $(MLX)/$(MLX_LIB) ./$(MLX_LIB)
 	# @clear
 	make $(NAME)

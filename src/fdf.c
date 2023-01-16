@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 04:09:20 by bajeanno          #+#    #+#             */
-/*   Updated: 2023/01/15 21:37:15 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/16 17:35:06 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,15 @@ int	main(int argc, char **argv)
 
 	map = get_map(argv[1]);
 	
-	win = win_init(1000, 1600, "fdf");
+	win = win_init(1500, 1500, "fdf");
 	if (!win)
 		return (-1);//...
 	spacing.y =(win->height /(map->line)) *0.7 ;
 	spacing.x = win->width /(map->column) *0.7 ;
 	
+	spacing.y = spacing.x + spacing.y;
+	spacing.y /= 2;
+	spacing.x = spacing.y;
 
 	
 	compute_map_x_y_coords(map, spacing);
@@ -83,7 +86,7 @@ int	main(int argc, char **argv)
 	// draw_cross(map_center_iso_offseted, 50, win);
 	display_map(map, win, offset);
 
-	
+	mlx_hook(win->win, 17, 0, close_window, win);
 	mlx_loop(win->mlx);
 	free(win); // a mettre dans une sous fonction qui libere tout a l'interieur
 	return (0);
@@ -126,7 +129,7 @@ static void		compute_map_x_y_coords(t_map *map, t_p spacing)
 		{
 			map->map[line][column].x = (column * spacing.x) ;
 			map->map[line][column].y = line * spacing.y ;
-			map->map[line][column].z *= -4;
+			map->map[line][column].z *= -10;
 			column ++;
 		}
 		line ++;

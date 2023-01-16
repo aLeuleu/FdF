@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 16:01:22 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/15 22:01:46 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/16 16:38:32 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void		display_map_line(t_map *map, int line, t_win *win, t_p offset)
 		}
 		int z;
 		z = map->map[line][i].z;
-		if (
+/* 		if (
 			((i % 2 == 0) && (line %2 == 0) )
 			||( (i % 2 == 1) && (line %2 == 1) )
 			)
@@ -59,7 +59,7 @@ static void		display_map_line(t_map *map, int line, t_win *win, t_p offset)
 				if (map->map[line][i].z == z && map->map[line][i+ 1].z ==z && map->map[line + 1][i].z == z && map->map[line + 1][i + 1].z == z)
 					draw_tile(p, p_next_line, p_next_col, p_next_line_next_col, win);
 				// if (map->map[line][i].z == 0 && map->map[line][i+ 1].z == 0 && map->map[line + 1][i].z == 0 && map->map[line + 1][i + 1].z == 0)
-		
+		 */
 		i++;	
 	}
 }
