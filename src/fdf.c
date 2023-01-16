@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 04:09:20 by bajeanno          #+#    #+#             */
-/*   Updated: 2023/01/14 18:26:33 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/15 21:37:15 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ t_p3d				get_map_center(t_map *map)
 	return (center);
 }
 
+t_p	point(int x, int y)
+{
+	t_p res;
+
+	res.x = x;
+	res.y = y;
+
+	return (res);
+}
 
 int	main(int argc, char **argv)
 {
@@ -66,17 +75,15 @@ int	main(int argc, char **argv)
 	map_center_iso = iso_projection(&map_center); 
 	offset = get_offset(get_win_center(win), map_center_iso);
 	
- 	ft_printf("offset.x : %d\n", offset.x); //debug
 	// draw_cross(map_center_iso, 50, win);
 	map_center_iso_offseted = add_points(map_center_iso, offset);
-	ft_printf("map_center_iso_offseted.x : %d\n", map_center_iso_offseted.x); //debug
-	ft_printf("map_center_iso_offseted.y : %d\n", map_center_iso_offseted.y); //debug
 
 	
 	// draw_center(win);
 	// draw_cross(map_center_iso_offseted, 50, win);
 	display_map(map, win, offset);
 
+	
 	mlx_loop(win->mlx);
 	free(win); // a mettre dans une sous fonction qui libere tout a l'interieur
 	return (0);

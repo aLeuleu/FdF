@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 16:20:56 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/14 12:59:22 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/15 20:13:57 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	draw_line(t_p a, t_p b, t_win *win)
 	float    x;
 	float    y;
 
-	steps = max(abs(b.x - a.x), abs(b.x - a.x));
+	steps = max(abs(b.x - a.x), abs(b.x - a.x)); // ?
 	x = a.x;
 	y = a.y;
 	i = 0;

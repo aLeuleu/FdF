@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_pixel.c                                        :+:      :+:    :+:   */
+/*   are_equals_points.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/13 16:22:38 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/15 22:03:43 by alevra           ###   ########lyon.fr   */
+/*   Created: 2023/01/15 16:36:20 by alevra            #+#    #+#             */
+/*   Updated: 2023/01/15 16:40:07 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	put_pixel(int x, int y, t_win *win)
+/* 
+return (p1 == p2)
+ */
+int	are_equals_points(t_p p1, t_p p2)
 {
-	if (x < win->width && y < win->height )
-		mlx_pixel_put(win->mlx, win->win, x, y, 0xFF0000);
-	else
-		ft_printf("."); //debug
-		// ft_printf("OUTBOUND [x:%d][y:%d]\n", x, y); //debug
+	return (p1.x == p2.x && p1.y == p2.y);
 }

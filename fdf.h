@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 06:15:40 by bajeanno          #+#    #+#             */
-/*   Updated: 2023/01/14 12:55:58 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/15 17:20:49 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,7 @@ void		draw_cross(t_p p, int l, t_win *win);
 t_p			get_win_center(t_win *win);
 t_p			get_offset(t_p win_center, t_p map_iso_center);
 t_p			add_points(t_p p1, t_p p2);
+int			are_equals_points(t_p p1, t_p p2);
+void		draw_tile(t_p p0, t_p p1, t_p p2, t_p p3, t_win *win);
 
 #endif
