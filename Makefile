@@ -16,23 +16,24 @@ NAME = fdf
 HEADER = $(NAME).h
 
 SRC =	display_map.c \
-		draw_center.c \
 		fdf.c \
 		get_map.c \
 		next_tab_element.c \
-		print_map.c \
 		iso_projection.c \
 		draw_line.c \
 		put_pixel.c \
-		draw_cross.c \
 		get_win_center.c \
 		get_offset.c \
 		add_points.c \
+		close_window.c \
+		freemap.c \
+		get_map_center.c \
+		compute_map_x_y_coords.c \
+		win_init.c \
+		malloc_map.c \
+		my_mlx_pixel_put.c \
 
-SRC_BONUS = draw_tile.c	\
-		are_equals_points.c \
-
-FLAGS = # -Wall -Wextra -Werror	
+FLAGS = -Wall -Wextra -Werror	
 
 OS := $(shell uname)
 ifeq ($(OS),Darwin)
@@ -48,15 +49,12 @@ endif
 OBJ = $(addprefix obj/,$(SRC:.c=.o))
 OBJ_BONUS = $(addprefix obj/,$(SRC_BONUS:.c=.o))
 
-FSAN = -fsanitize=address
-
-
+FSAN = #-fsanitize=address
 
 all	: create_obj_folder
 	@make -C libft
 	make -C $(MLX)
 	@cp $(MLX)/$(MLX_LIB) ./$(MLX_LIB)
-	# @clear
 	make $(NAME)
 	@make end_message
 
@@ -95,17 +93,10 @@ run:
 	./$(NAME) $(ARG)
 
 end_message:
-	@clear
+	#@clear
 	@echo "Done !"
 
-bonus : create_obj_folder
-	@make -C libft
-	@make -C $(MLX)
-	@cp $(MLX)/$(MLX_LIB) ./$(MLX_LIB)
-	# @clear
-	make $(NAME)_bonus
-	@make end_message
+bonus : 
 
-
-.PHONY: all clean fclean re create_obj_folder end_message
+.PHONY: all clean fclean re bonus create_obj_folder end_message
 	

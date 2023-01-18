@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   next_tab_element.c                                 :+:      :+:    :+:   */
+/*   freemap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/13 16:10:20 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/17 20:51:37 by alevra           ###   ########lyon.fr   */
+/*   Created: 2023/01/16 18:49:30 by alevra            #+#    #+#             */
+/*   Updated: 2023/01/17 21:09:18 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_p3d	*next_tab_element(t_map *map, int column, int line)
+void	freemap(t_map *map)
 {
-	if (!(line < map->line && column < map->column))
-		return (NULL);
-	if (column != map->column -1)
-		return (&(map->map[line][column +1]));
-	else
-		if (line != map->line -1)
-			return (&(map->map[line +1][0]));
-	return (NULL);
+	int	line;
+
+	line = map->line - 1;
+	while (line >= 0)
+	{
+		if (map->map[line])
+			free(map->map[line--]);
+		else
+			ft_printf("WARNING : trying to free a null pointer\n");
+	}
+	free(map->map);
+	free(map);
 }

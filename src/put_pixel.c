@@ -6,17 +6,14 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 16:22:38 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/16 17:31:39 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/18 18:54:57 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	put_pixel(int x, int y, t_win *win)
+void	put_pixel(t_p p, t_win *win, t_data *data, int color)
 {
-	if (x < win->width && y < win->height )
-		mlx_pixel_put(win->mlx, win->win, x, y, 0xFFFFFF);
-	else
-		ft_printf("."); //debug
-		// ft_printf("OUTBOUND [x:%d][y:%d]\n", x, y); //debug
+	if (p.x < win->width && p.y < win->height)
+		my_mlx_pixel_put(data, p.x, p.y, color);
 }

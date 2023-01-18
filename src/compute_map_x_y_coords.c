@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   next_tab_element.c                                 :+:      :+:    :+:   */
+/*   compute_map_x_y_coords.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/13 16:10:20 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/17 20:51:37 by alevra           ###   ########lyon.fr   */
+/*   Created: 2023/01/17 18:55:23 by alevra            #+#    #+#             */
+/*   Updated: 2023/01/17 21:10:25 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_p3d	*next_tab_element(t_map *map, int column, int line)
+void	compute_map_x_y_coords(t_map *map, t_p spacing)
 {
-	if (!(line < map->line && column < map->column))
-		return (NULL);
-	if (column != map->column -1)
-		return (&(map->map[line][column +1]));
-	else
-		if (line != map->line -1)
-			return (&(map->map[line +1][0]));
-	return (NULL);
+	int	line;
+	int	column;
+
+	line = 0;
+	while (line < map->line)
+	{
+		column = 0;
+		while (column < map->column)
+		{
+			map->map[line][column].x = (column * spacing.x);
+			map->map[line][column].y = line * spacing.y ;
+			map->map[line][column].z *= -10;
+			column ++;
+		}
+		line ++;
+	}
 }

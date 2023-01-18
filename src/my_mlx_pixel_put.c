@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   are_equals_points.c                                :+:      :+:    :+:   */
+/*   my_mlx_pixel_put.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/15 16:36:20 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/15 16:40:07 by alevra           ###   ########lyon.fr   */
+/*   Created: 2023/01/18 18:40:05 by alevra            #+#    #+#             */
+/*   Updated: 2023/01/18 18:48:09 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-/* 
-return (p1 == p2)
- */
-int	are_equals_points(t_p p1, t_p p2)
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	return (p1.x == p2.x && p1.y == p2.y);
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }

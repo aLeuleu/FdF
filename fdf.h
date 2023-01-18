@@ -6,17 +6,28 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 06:15:40 by bajeanno          #+#    #+#             */
-/*   Updated: 2023/01/16 17:35:33 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/18 19:08:39 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
+# ifndef WIN_WIDTH
+#  define WIN_WIDTH 1500
+# endif
+# ifndef WIN_HEIGHT
+#  define WIN_HEIGHT 1500
+# endif
+# ifndef ESC_KEY
+#  define ESC_KEY 53
+# endif
 # include "mlx.h"
 # include "libft/libft.h"
 # include <math.h>
+# include <errno.h>
+# include <string.h>
 
-typedef struct	s_data {
+typedef struct s_data {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -24,44 +35,51 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
-typedef struct	s_p3d {
+typedef struct s_p3d {
 	int		x;
 	int		y;
 	int		z;
 }				t_p3d;
 
-typedef struct	s_map {
+typedef struct s_map {
 	t_p3d	**map;
 	int		column;
 	int		line;
 }				t_map;
 
-typedef struct	s_win {
+typedef struct s_win {
+	t_data	*img;
 	void	*mlx;
 	void	*win;
 	int		width;
 	int		height;
 }				t_win;
 
-typedef struct	s_p {
+typedef struct s_p {
 	int		x;
 	int		y;
 }				t_p;
 
-t_map		*get_map(char *map_file);
-void		print_map(t_map *map); //debug
-void		draw_center(t_win *win);
-void		display_map(t_map *map, t_win *win,t_p offset);
+t_map		*get_map(const char *map_file);
+void		display_map(t_map *map, t_win *win, t_p offset);
 t_p			iso_projection(t_p3d *p3d);
 t_p3d		*next_tab_element(t_map *map, int column, int line);
 void		draw_line(t_p a, t_p b, t_win *win);
-void		draw_line2(t_p start, t_p end, t_win *win);
-void		put_pixel(int x, int y, t_win *win);
+void		put_pixel(t_p p, t_win *win, t_data *data, int color);
 void		draw_cross(t_p p, int l, t_win *win);
 t_p			get_win_center(t_win *win);
 t_p			get_offset(t_p win_center, t_p map_iso_center);
 t_p			add_points(t_p p1, t_p p2);
-int			are_equals_points(t_p p1, t_p p2);
-void		draw_tile(t_p p0, t_p p1, t_p p2, t_p p3, t_win *win);
-int   	 	close_window(t_win *win);
+int			pts_equ(t_p p1, t_p p2);
+int			close_window(t_win *win);
+void		freemap(t_map *map);
+t_p3d		get_map_center(t_map *map);
+void		compute_map_x_y_coords(t_map *map, t_p spacing);
+t_win		*win_init(int height, int width, char *window_title);
+int			malloc_map(t_map **map, int width, int height);
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
 #endif
+/* void		draw_center(t_win *win);
+void		draw_tile(t_p p0, t_p p1, t_p p2, t_p p3, t_win *win);
+void		print_map(t_map *map); //debug */

@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 16:23:25 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/15 20:19:52 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/17 19:56:57 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ Call repeatedly 'draw_lines'
 
 // 	log_point(step, "step");
 	
-// 	while (!(are_equals_points(start, p2)))
+// 	while (!(pts_equ(start, p2)))
 // 	{
 // 		ft_printf("draw line [%d][%d] -> [%d][%d]\n", start.x , start.y , end.x, end.y);
 // /* 		if(steps == 10)

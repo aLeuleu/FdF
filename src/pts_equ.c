@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_windows.c                                    :+:      :+:    :+:   */
+/*   pts_equ.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/16 17:34:07 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/16 17:34:44 by alevra           ###   ########lyon.fr   */
+/*   Created: 2023/01/15 16:36:20 by alevra            #+#    #+#             */
+/*   Updated: 2023/01/17 20:51:27 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int    close_window(t_win *win)
+int	pts_equ(t_p p1, t_p p2)
 {
-    mlx_destroy_window(win->mlx, win->win);
-    free(win);
-    exit(0);
-    return (0);
+	return (p1.x == p2.x && p1.y == p2.y);
 }

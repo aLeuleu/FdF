@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_line.c                                        :+:      :+:    :+:   */
+/*   malloc_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/13 16:20:56 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/18 19:08:02 by alevra           ###   ########lyon.fr   */
+/*   Created: 2023/01/17 20:58:31 by alevra            #+#    #+#             */
+/*   Updated: 2023/01/17 20:58:48 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_line(t_p a, t_p b, t_win *win)
+int	malloc_map(t_map **map, int width, int height)
 {
-	int		i;
-	int		steps;
-	float	x;
-	float	y;
-	t_p		to_draw;
+	int	i;
 
-	steps = ft_max(abs(b.x - a.x), abs(b.x - a.x));
-	x = a.x;
-	y = a.y;
 	i = 0;
-	while (i <= steps)
+	(*map) = malloc(sizeof(t_map));
+	if (!(*map))
+		return (0);
+	(*map)->map = malloc(sizeof(t_p3d *) * height);
+	if (!(*map)->map)
+		return (free(*map), 0);
+	while (i < height)
 	{
-		to_draw.x = x;
-		to_draw.y = y;
-		put_pixel(to_draw, win, win->img, 0xFFFFFF);
-		x += (b.x - a.x) / (float)steps;
-		y += (b.y - a.y) / (float)steps;
+		(*map)->map[i] = malloc(sizeof(t_p3d) * width);
+		if (!(*map)->map[i])
+			return (ft_freetab((void **)((*map)->map), i), 0);
 		i++;
 	}
+	(*map)->line = height;
+	(*map)->column = width;
+	return (1);
 }
