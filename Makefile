@@ -28,7 +28,6 @@ SRC =	add_points.c \
 		iso_projection.c \
 		next_tab_element.c \
 		malloc_map.c \
-		my_mlx_pixel_put.c \
 		draw_line.c \
 		put_pixel.c \
 		win_init.c \
