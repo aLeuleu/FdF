@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 06:15:40 by bajeanno          #+#    #+#             */
-/*   Updated: 2023/01/19 15:55:51 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/19 16:57:15 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void		put_pixel(t_p p, t_win *win, t_data *data, int color);
 t_p			get_win_center(t_win *win);
 t_p			get_offset(t_p win_center, t_p map_iso_center);
 t_p			add_points(t_p p1, t_p p2);
-int			pts_equ(t_p p1, t_p p2);
 int			close_window(t_win *win);
 void		freemap(t_map *map);
 t_p3d		get_map_center(t_map *map);

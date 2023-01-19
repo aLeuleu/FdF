@@ -15,23 +15,23 @@ NAME = fdf
 
 HEADER = $(NAME).h
 
-SRC =	display_map.c \
-		fdf.c \
-		get_map.c \
-		next_tab_element.c \
-		iso_projection.c \
-		draw_line.c \
-		put_pixel.c \
-		get_win_center.c \
-		get_offset.c \
-		add_points.c \
+SRC =	add_points.c \
 		close_window.c \
+		compute_map_x_y_coords.c \
+		display_map.c \
+		fdf.c \
 		freemap.c \
 		get_map_center.c \
-		compute_map_x_y_coords.c \
-		win_init.c \
+		get_map.c \
+		get_win_center.c \
+		get_offset.c \
+		iso_projection.c \
+		next_tab_element.c \
 		malloc_map.c \
 		my_mlx_pixel_put.c \
+		draw_line.c \
+		put_pixel.c \
+		win_init.c \
 
 SRC_BONUS =
 
