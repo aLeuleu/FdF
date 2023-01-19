@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 18:57:00 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/19 14:36:54 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/19 15:18:42 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ t_win	*win_init(int height, int width, char *window_title)
 	res->img.addr = mlx_get_data_addr(res->img.img, &res->img.bits_per_pixel,
 			&res->img.line_length, &res->img.endian);
 	res->win = mlx_new_window(res->mlx, width, height, window_title);
-	//secu
+	if (!res->win)
+		return (mlx_destroy_image(res->mlx, res->img.img), free(res), NULL);
 	res->width = width;
 	res->height = height;
 	return (res);

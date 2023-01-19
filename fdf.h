@@ -6,20 +6,23 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 06:15:40 by bajeanno          #+#    #+#             */
-/*   Updated: 2023/01/19 14:30:06 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/19 15:55:51 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 1500
+#  define WIN_WIDTH 2500
 # endif
 # ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 1500
+#  define WIN_HEIGHT 1300
 # endif
 # ifndef ESC_KEY
 #  define ESC_KEY 53
+# endif
+# ifndef CLOSE_WINDOW_EVENT
+#  define CLOSE_WINDOW_EVENT 17
 # endif
 # include "mlx.h"
 # include "libft/libft.h"
@@ -61,12 +64,11 @@ typedef struct s_p {
 }				t_p;
 
 t_map		*get_map(const char *map_file);
-void		display_map(t_map *map, t_win *win, t_p offset);
+void		display_map(t_map *map, t_win *win);
 t_p			iso_projection(t_p3d *p3d);
 t_p3d		*next_tab_element(t_map *map, int column, int line);
 void		draw_line(t_p a, t_p b, t_win *win);
 void		put_pixel(t_p p, t_win *win, t_data *data, int color);
-void		draw_cross(t_p p, int l, t_win *win);
 t_p			get_win_center(t_win *win);
 t_p			get_offset(t_p win_center, t_p map_iso_center);
 t_p			add_points(t_p p1, t_p p2);
@@ -80,6 +82,3 @@ int			malloc_map(t_map **map, int width, int height);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 #endif
-/* void		draw_center(t_win *win);
-void		draw_tile(t_p p0, t_p p1, t_p p2, t_p p3, t_win *win);
-void		print_map(t_map *map); //debug */

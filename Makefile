@@ -33,7 +33,7 @@ SRC =	display_map.c \
 		malloc_map.c \
 		my_mlx_pixel_put.c \
 
-FLAGS = #-Wall -Wextra -Werror	
+FLAGS = -Wall -Wextra -Werror	
 
 OS := $(shell uname)
 ifeq ($(OS),Darwin)
@@ -61,9 +61,6 @@ all	: create_obj_folder
 $(NAME): libft/libft.a $(OBJ)
 	cc $(OBJ) $(FSAN) $(MLX_FLAGS) -g3  -L ./libft -lft -lm -o $(NAME)
 
-$(NAME)_bonus: libft/libft.a $(OBJ) $(OBJ_BONUS)
-	cc $(OBJ) $(OBJ_BONUS) $(FSAN) $(MLX_FLAGS) -g3  -L ./libft -lft -lm -o $(NAME)_bonus
-
 obj/%.o : src/%.c $(HEADER) Makefile
 		cc -c -g3 ${FLAGS} $(FSAN) $< -o $@ -I $(MLX) -I.
 
@@ -81,22 +78,14 @@ clean:
 fclean: clean
 	make fclean -C libft
 	rm -f $(NAME)
+	rm -f $(MLX_LIB)
 
 re: 
 	make fclean
 	make all
 
-debug : libft/libft.a
-	cc $(FSANITIZE) -Wall -Wextra -Werror $(SRC) -L ./libft -lft -o $(NAME)_debug  && ./$(NAME)_debug $(ARG) && echo "" && ./$(NAME)_debug $(ARG) | ./checker $(ARG) 
-
-run:
-	./$(NAME) $(ARG)
-
 end_message:
-	#@clear
 	@echo "Done !"
 
-bonus : 
-
-.PHONY: all clean fclean re bonus create_obj_folder end_message
+.PHONY: all clean fclean re create_obj_folder end_message
 	

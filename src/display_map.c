@@ -6,24 +6,29 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 16:01:22 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/18 19:09:11 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/19 15:46:13 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 static void		display_map_line(t_map *map, int line, t_win *win, t_p offset);
+static void		set_spacing(t_win *win, t_map *map, t_p *spacing);
 
-void	display_map(t_map *map, t_win *win, t_p offset)
+void	display_map(t_map *map, t_win *win)
 {
-	int	i;
+	int		i;
+	t_p		spacing;
+	t_p3d	map_center;
+	t_p		offset;
 
 	i = 0;
+	set_spacing(win, map, &spacing);
+	compute_map_x_y_coords(map, spacing);
+	map_center = get_map_center(map);
+	offset = get_offset(get_win_center(win), iso_projection(&map_center));
 	while (i < map->line)
-	{
-		display_map_line(map, i, win, offset);
-		i ++;
-	}
+		display_map_line(map, i++, win, offset);
 }
 
 static void	display_map_line(t_map *map, int line, t_win *win, t_p offset)
@@ -53,4 +58,12 @@ static void	display_map_line(t_map *map, int line, t_win *win, t_p offset)
 		}
 		i++;
 	}
+}
+
+static void	set_spacing(t_win *win, t_map *map, t_p *spacing)
+{
+	spacing->y = ft_min(win->height, win->width)
+		/ ft_max(map->line, map->column);
+	spacing->y *= 0.7;
+	spacing->x = spacing->y;
 }

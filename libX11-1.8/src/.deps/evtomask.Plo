@@ -1,5 +1,0 @@
-evtomask.lo: evtomask.c /usr/include/stdc-predef.h config.h \
- /usr/include/X11/X.h
-/usr/include/stdc-predef.h:
-config.h:
-/usr/include/X11/X.h:
