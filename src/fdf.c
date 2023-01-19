@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 04:09:20 by bajeanno          #+#    #+#             */
-/*   Updated: 2023/01/18 19:19:53 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/19 14:24:38 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,10 @@ int	main(int argc, char **argv)
 	map_center = get_map_center(map);
 	offset = get_offset(get_win_center(win), iso_projection(&map_center));
 	display_map(map, win, offset);
-	mlx_put_image_to_window(win->mlx, win->win, win->img->img, 0, 0);
+	mlx_put_image_to_window(win->mlx, win->win, win->img.img, 0, 0);
 	freemap(map);
 	mlx_hook(win->win, 17, 0, close_window, win);
 	mlx_key_hook(win->win, key_hook, win);
 	mlx_loop(win->mlx);
-	mlx_destroy_image(win->win, win->img);
-	ft_printf("win->img : %p\n", win->img); 	//debug
-	ft_printf("win : %p\n", win);				//debug
-	free(win->img);
-	free(win);
 	return (0);
 }

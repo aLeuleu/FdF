@@ -33,7 +33,7 @@ SRC =	display_map.c \
 		malloc_map.c \
 		my_mlx_pixel_put.c \
 
-FLAGS = -Wall -Wextra -Werror	
+FLAGS = #-Wall -Wextra -Werror	
 
 OS := $(shell uname)
 ifeq ($(OS),Darwin)
@@ -65,7 +65,7 @@ $(NAME)_bonus: libft/libft.a $(OBJ) $(OBJ_BONUS)
 	cc $(OBJ) $(OBJ_BONUS) $(FSAN) $(MLX_FLAGS) -g3  -L ./libft -lft -lm -o $(NAME)_bonus
 
 obj/%.o : src/%.c $(HEADER) Makefile
-		cc -c -g3 ${FLAGS} $< -o $@ -I $(MLX) -I.
+		cc -c -g3 ${FLAGS} $(FSAN) $< -o $@ -I $(MLX) -I.
 
 create_obj_folder :
 	mkdir -p obj

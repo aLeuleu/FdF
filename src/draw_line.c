@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 16:20:56 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/18 19:08:02 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/19 14:24:10 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	draw_line(t_p a, t_p b, t_win *win)
 	{
 		to_draw.x = x;
 		to_draw.y = y;
-		put_pixel(to_draw, win, win->img, 0xFFFFFF);
+		put_pixel(to_draw, win, &win->img, 0xFFFFFF);
 		x += (b.x - a.x) / (float)steps;
 		y += (b.y - a.y) / (float)steps;
 		i++;

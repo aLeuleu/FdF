@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 06:15:40 by bajeanno          #+#    #+#             */
-/*   Updated: 2023/01/18 19:08:39 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/19 14:30:06 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_map {
 }				t_map;
 
 typedef struct s_win {
-	t_data	*img;
+	t_data	img;
 	void	*mlx;
 	void	*win;
 	int		width;
