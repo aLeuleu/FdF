@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 06:15:40 by bajeanno          #+#    #+#             */
-/*   Updated: 2023/01/20 00:24:29 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/20 00:25:51 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_p			add_points(t_p p1, t_p p2);
 int			close_window(t_win *win);
 void		freemap(t_map *map);
 t_p3d		get_map_center(t_map *map);
-void		compute_map_x_y_coords(t_map *map, int spacing);
+void		compute_map_coords(t_map *map, int spacing);
 t_win		*win_init(int height, int width, char *window_title);
 int			malloc_map(t_map *map, int width);
 

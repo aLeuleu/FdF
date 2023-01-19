@@ -17,7 +17,7 @@ HEADER = $(NAME).h
 
 SRC =	add_points.c \
 		close_window.c \
-		compute_map_x_y_coords.c \
+		compute_map_coords.c \
 		display_map.c \
 		fdf.c \
 		freemap.c \
