@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 12:47:32 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/17 19:50:54 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/19 23:21:13 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,6 @@ int					ft_overflow_int(long long nb);
 int					how_many_splits(const char *str, char c, int *res);
 int					ft_sqrt(int nb);
 int					ft_min(int a, int b);
+int					ft_tablen(void **tab);
+
 #endif

@@ -39,8 +39,8 @@ FLAGS = -Wall -Wextra -Werror
 
 OS := $(shell uname)
 ifeq ($(OS),Darwin)
-  MLX = mlx_macos
-  MLX_LIB = libmlx.dylib
+  MLX = minilibx_macos
+  MLX_LIB = libmlx.a
   MLX_FLAGS = -L$(MLX) -lmlx -framework OpenGL -framework AppKit
 else
   MLX = mlx_linux
@@ -75,7 +75,7 @@ create_obj_folder :
 clean:
 	rm -f $(OBJ)
 	rm -f $(OBJ_BONUS)
-	make clean -C mlx_macos
+	make clean -C $(MLX)
 	@if [ -d "./obj" ]; then\
 		rm -r obj;\
 	fi
@@ -83,7 +83,7 @@ clean:
 
 fclean: clean
 	make fclean -C libft
-	make clean -C mlx_macos
+	make clean -C $(MLX)
 	rm -f $(NAME)
 	rm -f $(NAME)_bonus
 	rm -f $(MLX_LIB)

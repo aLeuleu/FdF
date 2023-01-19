@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 06:15:40 by bajeanno          #+#    #+#             */
-/*   Updated: 2023/01/19 16:57:15 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/19 23:53:41 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_p {
 	int		y;
 }				t_p;
 
-t_map		*get_map(const char *map_file);
+int			get_map(const char *map_file, t_map *map);
 void		display_map(t_map *map, t_win *win);
 t_p			iso_projection(t_p3d *p3d);
 t_p3d		*next_tab_element(t_map *map, int column, int line);
@@ -77,7 +77,7 @@ void		freemap(t_map *map);
 t_p3d		get_map_center(t_map *map);
 void		compute_map_x_y_coords(t_map *map, t_p spacing);
 t_win		*win_init(int height, int width, char *window_title);
-int			malloc_map(t_map **map, int width, int height);
+int			malloc_map(t_map *map, int width);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 #endif

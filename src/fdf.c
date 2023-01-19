@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 04:09:20 by bajeanno          #+#    #+#             */
-/*   Updated: 2023/01/19 15:59:53 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/19 23:59:39 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,17 @@ static int	key_hook(int keycode, t_win *win)
 int	main(int argc, char **argv)
 {
 	t_win	*win;
-	t_map	*map;
+	t_map	map;
 
 	if (argc != 2)
 		return (-1);
-	map = get_map(argv[1]);
-	if (!map)
+	if (!get_map(argv[1], &map))
 		return (-1);
 	win = win_init(WIN_HEIGHT, WIN_WIDTH, "fdf");
 	if (!win)
-		return (freemap(map), -1);
-	display_map(map, win);
-	freemap(map);
+		return (freemap(&map), -1);
+	display_map(&map, win);
+	freemap(&map);
 	mlx_put_image_to_window(win->mlx, win->win, win->img.img, 0, 0);
 	mlx_hook(win->win, CLOSE_WINDOW_EVENT, 0, close_window, win);
 	mlx_key_hook(win->win, key_hook, win);
