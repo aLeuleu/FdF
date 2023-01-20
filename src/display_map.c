@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 16:01:22 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/20 00:20:25 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/20 00:32:01 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	display_map(t_map *map, t_win *win)
 
 	i = 0;
 	set_spacing(win, map, &spacing);
-	compute_map_x_y_coords(map, spacing);
+	compute_map_coords(map, spacing);
 	map_center = get_map_center(map);
 	offset = get_offset(get_win_center(win), iso_projection(&map_center));
 	while (i < map->line)
