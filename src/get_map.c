@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:45:25 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/19 23:59:31 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/20 15:21:20 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,23 @@ static int	str_to_map(char **splits_by_lines, t_map *map)
 
 static void	cpy_splits_into_map_line(char **splits, t_map *map, int height)
 {
-	int	i;
+	int		i;
+	char	*coma;
 
 	i = 0;
 	while (i < map->column)
 	{
 		map->map[height][i].z = ft_atoi(splits[i]);
+		coma = ft_strchr(splits[i], ',');
+		if (coma)
+			ft_printf("coma : %s\n", coma+3);
+		else
+			map->map[height][i].color = 0xFFFFFF;
 		i ++;
 	}
 }
+
+
 
 static char	*file_to_str(int fd)
 {
