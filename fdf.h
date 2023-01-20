@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 06:15:40 by bajeanno          #+#    #+#             */
-/*   Updated: 2023/01/20 00:25:51 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/20 13:45:56 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_p3d {
 	int		x;
 	int		y;
 	int		z;
+	int		color;
 }				t_p3d;
 
 typedef struct s_map {
@@ -61,6 +62,7 @@ typedef struct s_win {
 typedef struct s_p {
 	int		x;
 	int		y;
+	int		color;
 }				t_p;
 
 int			get_map(const char *map_file, t_map *map);
