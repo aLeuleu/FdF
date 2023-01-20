@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 16:20:56 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/19 14:24:10 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/20 00:50:36 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	draw_line(t_p a, t_p b, t_win *win)
 	float	y;
 	t_p		to_draw;
 
-	steps = ft_max(abs(b.x - a.x), abs(b.x - a.x));
+	steps = ft_max(abs(b.x - a.x), abs(b.y - a.y));
 	x = a.x;
 	y = a.y;
 	i = 0;
 	while (i <= steps)
 	{
-		to_draw.x = x;
-		to_draw.y = y;
+		to_draw.x = round(x);
+		to_draw.y = round(y);
 		put_pixel(to_draw, win, &win->img, 0xFFFFFF);
 		x += (b.x - a.x) / (float)steps;
 		y += (b.y - a.y) / (float)steps;
