@@ -6,17 +6,17 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 06:15:40 by bajeanno          #+#    #+#             */
-/*   Updated: 2023/01/20 13:45:56 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/23 13:48:21 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 2500
+#  define WIN_WIDTH 1600
 # endif
 # ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 1300
+#  define WIN_HEIGHT 900
 # endif
 # ifndef ESC_KEY
 #  define ESC_KEY 53

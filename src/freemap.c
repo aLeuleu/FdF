@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 18:49:30 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/20 00:04:30 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/21 17:36:51 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,11 @@
 
 void	freemap(t_map *map)
 {
-	ft_freetab((void **)map->map, map->line -1);
+	if (map->map)
+		ft_freetab((void **)map->map, map->line -1);
+	if (map->map)
+	{
+		ft_printf("map->map still exist\n");
+		free(map->map);
+	}
 }

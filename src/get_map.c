@@ -6,7 +6,11 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:45:25 by alevra            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/01/20 15:21:20 by alevra           ###   ########lyon.fr   */
+=======
+/*   Updated: 2023/01/21 17:33:12 by alevra           ###   ########lyon.fr   */
+>>>>>>> c8a1ecd84b8ef16aff1bf8129833613b6822732c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +33,7 @@ int	get_map(const char *map_file, t_map *map)
 	}
 	parse_map(fd, map);
 	close(fd);
-	return (1);
+	return ((map->map)!= 0);
 }
 
 static void	parse_map(int fd, t_map *map)
@@ -39,19 +43,24 @@ static void	parse_map(int fd, t_map *map)
 	int		columns;
 
 	str = file_to_str(fd);
+	ft_printf("file converted to str\n"); // debug
 	if (!str)
 		return ;
+	ft_printf("splitting by line..\n"); // debug
 	splits_by_lines = ft_split(str, '\n');
 	if (!splits_by_lines)
 		return (free(str));
+	ft_printf("ok\n"); // debug
 	map->line = ft_tablen((void **)splits_by_lines);
 	columns = how_many_splits(splits_by_lines[0], ' ', NULL);
 	if (!malloc_map(map, columns))
 		return (ft_freetab((void **)splits_by_lines, map->line - 1),
 			free(str));
+	ft_printf("map allocated\n"); // debug
 	if (!str_to_map(splits_by_lines, map))
 		return (ft_freetab((void **)splits_by_lines, map->line - 1),
 			free(str));
+	ft_printf("map is filled\n"); // debug
 	ft_freetab((void **)splits_by_lines, map->line - 1);
 	free(str);
 }
@@ -68,8 +77,12 @@ static int	str_to_map(char **splits_by_lines, t_map *map)
 		if (!splits_by_spaces)
 			return (freemap(map), 0);
 		if (map->column != ft_tablen((void **)splits_by_spaces))
+		{
+			ft_printf("line : %d, number of columns : %d\n", map->line - 1, map->column);
+			ft_printf("line : %d, number of columns : %d\n",map->line, ft_tablen((void **)splits_by_spaces));
 			return (freemap(map), ft_freetab((void **)splits_by_spaces, \
 			ft_tablen((void **)splits_by_spaces)), 0);
+		}
 		cpy_splits_into_map_line(splits_by_spaces, map, height);
 		ft_freetab((void **)splits_by_spaces, map->column - 1);
 		height++;
@@ -81,14 +94,17 @@ static void	cpy_splits_into_map_line(char **splits, t_map *map, int height)
 {
 	int		i;
 	char	*coma;
-
+	
 	i = 0;
 	while (i < map->column)
 	{
 		map->map[height][i].z = ft_atoi(splits[i]);
 		coma = ft_strchr(splits[i], ',');
 		if (coma)
-			ft_printf("coma : %s\n", coma+3);
+		{
+			map->map[height][i].color = ft_hextoi(coma + 3);
+			// ft_printf("map->map[height][i].color : %d\n", map->map[height][i].color); //debug
+		}
 		else
 			map->map[height][i].color = 0xFFFFFF;
 		i ++;
