@@ -6,17 +6,17 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 06:15:40 by bajeanno          #+#    #+#             */
-/*   Updated: 2023/01/20 00:25:51 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/21 16:42:01 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 2500
+#  define WIN_WIDTH 1600
 # endif
 # ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 1300
+#  define WIN_HEIGHT 900
 # endif
 # ifndef ESC_KEY
 #  define ESC_KEY 53
@@ -42,6 +42,7 @@ typedef struct s_p3d {
 	int		x;
 	int		y;
 	int		z;
+	int		color;
 }				t_p3d;
 
 typedef struct s_map {
@@ -61,6 +62,7 @@ typedef struct s_win {
 typedef struct s_p {
 	int		x;
 	int		y;
+	int		color;
 }				t_p;
 
 int			get_map(const char *map_file, t_map *map);

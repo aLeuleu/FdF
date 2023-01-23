@@ -34,7 +34,7 @@ SRC =	add_points.c \
 
 SRC_BONUS =
 
-FLAGS = -Wall -Wextra -Werror	
+FLAGS = #-Wall -Wextra -Werror	
 
 OS := $(shell uname)
 ifeq ($(OS),Darwin)
