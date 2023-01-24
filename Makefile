@@ -32,9 +32,10 @@ SRC =	add_points.c \
 		put_pixel.c \
 		win_init.c \
 
-SRC_BONUS =
 
-FLAGS = #-Wall -Wextra -Werror	
+FLAGS = -Wall -Wextra -Werror	
+
+BONUS_FLAG = -DBONUS_FLAG
 
 OS := $(shell uname)
 ifeq ($(OS),Darwin)
@@ -48,7 +49,7 @@ else
 endif
 	
 OBJ = $(addprefix obj/,$(SRC:.c=.o))
-OBJ_BONUS = $(addprefix obj/,$(SRC_BONUS:.c=.o))
+OBJ_BONUS = $(addprefix bonus/obj_bonus/,$(SRC:.c=.o))
 
 FSAN = #-fsanitize=address
 
@@ -59,11 +60,14 @@ all	: create_obj_folder
 	make $(NAME)
 	@make end_message
 
-$(NAME): libft/libft.a $(OBJ)
+$(NAME): libft/libft.a $(OBJ) $(HEADER)
 	cc $(OBJ) $(FSAN) $(MLX_FLAGS) -g3  -L ./libft -lft -lm -o $(NAME)
 
-$(NAME)_bonus: libft/libft.a $(OBJ) $(OBJ_BONUS)
-	cc $(OBJ) $(OBJ_BONUS) $(FSAN) $(MLX_FLAGS) -g3  -L ./libft -lft -lm -o $(NAME)_bonus
+$(NAME)_bonus: libft/libft.a $(OBJ_BONUS) $(HEADER)
+	cc $(OBJ_BONUS) $(FSAN) $(MLX_FLAGS) -g3  -L ./libft -lft -lm -o $(NAME)_bonus
+
+bonus/obj_bonus/%.o : bonus/src_bonus/%.c $(HEADER) Makefile
+				cc -c -g3 ${FLAGS} $(FSAN) $(BONUS_FLAG) $< -o $@ -I $(MLX) -I.
 
 obj/%.o : src/%.c $(HEADER) Makefile
 		cc -c -g3 ${FLAGS} $(FSAN) $< -o $@ -I $(MLX) -I.
@@ -95,6 +99,11 @@ end_message:
 	@echo "Done !"
 
 bonus:
+	make create_obj_folder
+	make -C libft
+	make -j1 -C $(MLX)
+	cp $(MLX)/$(MLX_LIB) ./$(MLX_LIB)
+	make $(NAME)_bonus
+	@make end_message
 
 .PHONY: all clean fclean re create_obj_folder end_message bonus
-	

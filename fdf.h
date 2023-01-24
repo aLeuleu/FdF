@@ -5,22 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 06:15:40 by bajeanno          #+#    #+#             */
-/*   Updated: 2023/01/23 13:48:21 by alevra           ###   ########lyon.fr   */
+/*   Created: 2023/01/09 06:15:40 by alevra            #+#    #+#             */
+/*   Updated: 2023/01/24 01:42:35 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
+# ifndef BONUS_FLAG
+#  define BONUS 0
+# else
+#  define BONUS 1
+# endif
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 1600
+#  define WIN_WIDTH 2560
 # endif
 # ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 900
+#  define WIN_HEIGHT 1500
 # endif
-# ifndef ESC_KEY
-#  define ESC_KEY 53
-# endif
+# define KEY_Z 6
+# define KEY_X 7
+# define KEY_ESC 53
+# define KEY_PLUS 69
+# define KEY_MINUS 78
 # ifndef CLOSE_WINDOW_EVENT
 #  define CLOSE_WINDOW_EVENT 17
 # endif
@@ -49,12 +56,15 @@ typedef struct s_map {
 	t_p3d	**map;
 	int		column;
 	int		line;
+	float	scale;
+	float	height_factor;
 }				t_map;
 
 typedef struct s_win {
 	t_data	img;
 	void	*mlx;
 	void	*win;
+	t_map	*map;
 	int		width;
 	int		height;
 }				t_win;
@@ -77,7 +87,7 @@ t_p			add_points(t_p p1, t_p p2);
 int			close_window(t_win *win);
 void		freemap(t_map *map);
 t_p3d		get_map_center(t_map *map);
-void		compute_map_coords(t_map *map, int spacing);
+void		compute_map_coords(t_map *map, int spacing, float height_factor);
 t_win		*win_init(int height, int width, char *window_title);
 int			malloc_map(t_map *map, int width);
 

@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   freemap.c                                          :+:      :+:    :+:   */
+/*   iso_projection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/16 18:49:30 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/24 01:00:11 by alevra           ###   ########lyon.fr   */
+/*   Created: 2023/01/13 16:08:56 by alevra            #+#    #+#             */
+/*   Updated: 2023/01/20 13:46:35 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	freemap(t_map *map)
+t_p	iso_projection(t_p3d *p3d)
 {
-	if (map && map->map)
-		ft_freetab((void **)map->map, map->line -1);
-	map->map = 0;
+	t_p	res;
+
+	res.x = 0;
+	res.y = 0;
+	if (!p3d)
+		return (res);
+	res.x = 0.7071 * (p3d->x - p3d->y);
+	res.y = 0.8164 * p3d->z - ((-0.4082) * (p3d->x + p3d->y));
+	res.color = p3d->color;
+	return (res);
 }

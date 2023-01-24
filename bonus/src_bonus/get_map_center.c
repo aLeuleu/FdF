@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   freemap.c                                          :+:      :+:    :+:   */
+/*   get_map_center.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/16 18:49:30 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/24 01:00:11 by alevra           ###   ########lyon.fr   */
+/*   Created: 2023/01/17 18:47:11 by alevra            #+#    #+#             */
+/*   Updated: 2023/01/17 21:10:55 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	freemap(t_map *map)
+t_p3d	get_map_center(t_map *map)
 {
-	if (map && map->map)
-		ft_freetab((void **)map->map, map->line -1);
-	map->map = 0;
+	t_p3d	center;
+	int		map_width;
+	int		map_height;
+	t_p3d	**m;
+
+	m = map->map;
+	map_width = m[0][map->column -1].x;
+	map_height = m[map->line - 1][0].y;
+	center.x = map_width / 2;
+	center.y = map_height / 2;
+	center.z = 0;
+	return (center);
 }
