@@ -51,13 +51,11 @@ int	main(int argc, char **argv)
 	if (!win)
 		return (freemap(&map), -1);
 	win->map = &map;
-	map.height_factor = -1;
 	display_map(&map, win);
 	mlx_put_image_to_window(win->mlx, win->win, win->img.img, 0, 0);
 	mlx_hook(win->win, CLOSE_WINDOW_EVENT, 0, close_window, win);
 	mlx_key_hook(win->win, key_hook, win);
 	mlx_loop(win->mlx);
-	close_window(win);
 	return (0);
 }
 

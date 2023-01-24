@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 06:15:40 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/24 01:42:35 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/24 02:11:20 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_p {
 int			get_map(const char *map_file, t_map *map);
 void		display_map(t_map *map, t_win *win);
 t_p			iso_projection(t_p3d *p3d);
-t_p3d		*next_tab_element(t_map *map, int column, int line);
+t_p3d		*next_map_element(t_map *map, int column, int line);
 void		draw_line(t_p a, t_p b, t_win *win);
 void		put_pixel(t_p p, t_win *win, t_data *data, int color);
 t_p			get_win_center(t_win *win);

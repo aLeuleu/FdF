@@ -26,7 +26,7 @@ SRC =	add_points.c \
 		get_win_center.c \
 		get_offset.c \
 		iso_projection.c \
-		next_tab_element.c \
+		next_map_element.c \
 		malloc_map.c \
 		draw_line.c \
 		put_pixel.c \

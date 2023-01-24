@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 16:01:22 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/24 00:09:59 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/24 02:11:56 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	display_map_line(t_map *map, int line, t_win *win, t_p offset)
 	while (i < map->column)
 	{
 		p = iso_projection(&(map->map[line][i]));
-		p_next_col = iso_projection(next_tab_element(map, i, line));
+		p_next_col = iso_projection(next_map_element(map, i, line));
 		p = add_points(p, offset);
 		p_next_col = add_points(p_next_col, offset);
 		if (i != map->column - 1)
