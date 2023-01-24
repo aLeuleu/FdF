@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_map.c                                      :+:      :+:    :+:   */
+/*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 16:01:22 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/24 02:11:56 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/24 13:14:01 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void		display_map_line(t_map *map, int line, t_win *win, t_p offset);
+static void		draw_map_line(t_map *map, int line, t_win *win, t_p offset);
 static void		set_spacing(t_win *win, t_map *map, int *spacing, float scale);
 
-void	display_map(t_map *map, t_win *win)
+void	draw_map(t_map *map, t_win *win)
 {
 	int		i;
 	int		spacing;
@@ -28,10 +28,10 @@ void	display_map(t_map *map, t_win *win)
 	map_center = get_map_center(map);
 	offset = get_offset(get_win_center(win), iso_projection(&map_center));
 	while (i < map->line)
-		display_map_line(map, i++, win, offset);
+		draw_map_line(map, i++, win, offset);
 }
 
-static void	display_map_line(t_map *map, int line, t_win *win, t_p offset)
+static void	draw_map_line(t_map *map, int line, t_win *win, t_p offset)
 {
 	int	i;
 	t_p	p;

@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:45:25 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/24 01:06:17 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/24 13:17:52 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	get_map(const char *map_file, t_map *map)
 	parse_map(fd, map);
 	close(fd);
 	map->scale = 1;
-	map->height_factor = -1;
+	map->height_factor = -7;
 	return ((map->map) != 0);
 }
 
@@ -67,8 +67,9 @@ static int	lst_to_map(t_list *list, t_map *map)
 			return (0);
 		if (map->column != ft_tablen((void **)splits_by_spaces))
 		{
-			ft_printf("line : %d, number of columns : %d\n", map->line - 1, map->column);
-			ft_printf("line : %d, number of columns : %d\n", map->line, ft_tablen((void **)splits_by_spaces));
+			ft_printf("line : %d -> %d columns\n", map->line - 1, map->column);
+			ft_printf("line : %d -> %d columns\n", map->line, \
+			ft_tablen((void **)splits_by_spaces));
 			return (ft_freetab((void **)splits_by_spaces, \
 			ft_tablen((void **)splits_by_spaces) - 1), 0);
 		}

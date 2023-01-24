@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:34:07 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/23 19:34:57 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/24 17:36:44 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 static void	free_if_exist(void *ptr);
 
-int	close_window(t_win *win)
+void	close_window(t_win *win)
 {
-	mlx_destroy_image(win->mlx, win->img.img);
-	mlx_destroy_window(win->mlx, win->win);
+	if (win->img.img)
+		mlx_destroy_image(win->mlx, win->img.img);
+	if (win->mlx)
+		mlx_destroy_window(win->mlx, win->win);
 	freemap(win->map);
 	free_if_exist(win);
 	exit(0);
-	return (0);
 }
 
 static void	free_if_exist(void *ptr)

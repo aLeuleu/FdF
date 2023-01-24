@@ -18,7 +18,7 @@ HEADER = $(NAME).h
 SRC =	add_points.c \
 		close_window.c \
 		compute_map_coords.c \
-		display_map.c \
+		draw_map.c \
 		fdf.c \
 		freemap.c \
 		get_map_center.c \
@@ -31,9 +31,10 @@ SRC =	add_points.c \
 		draw_line.c \
 		put_pixel.c \
 		win_init.c \
+		draw_bg.c \
+		key_hook.c \
 
-
-FLAGS = -Wall -Wextra -Werror	
+FLAGS =# -Wall -Wextra -Werror	
 
 BONUS_FLAG = -DBONUS_FLAG
 

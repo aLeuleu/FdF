@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iso_projection.c                                   :+:      :+:    :+:   */
+/*   draw_bg.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/13 16:08:56 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/24 17:54:38 by alevra           ###   ########lyon.fr   */
+/*   Created: 2023/01/24 13:08:16 by alevra            #+#    #+#             */
+/*   Updated: 2023/01/24 13:12:25 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_p	iso_projection(t_p3d *p3d)
+void	draw_bg(t_win *win, int color)
 {
-	t_p	res;
+	int	i;
+	int	j;
+	t_p	a;
+	t_p	b;
 
-	res.x = 0;
-	res.y = 0;
-	if (!p3d)
-		exit (0);
-	res.x = 0.7071 * (p3d->x - p3d->y);
-	res.y = 0.8164 * p3d->z - ((-0.4082) * (p3d->x + p3d->y));
-	res.color = p3d->color;
-	return (res);
+	i = 0;
+	a.x = 0;
+	a.y = 0;
+	a.color = color;
+	b.color = color;
+	b.x = win->width - 1;
+	b.y = 0;
+	j = 0;
+	while (j < win->height)
+	{
+		draw_line(a, b, win);
+		a.y = j;
+		b.y = j;
+		j++;
+	}
 }

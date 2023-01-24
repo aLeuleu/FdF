@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 06:15:40 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/24 02:11:20 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/24 17:36:56 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct s_p {
 }				t_p;
 
 int			get_map(const char *map_file, t_map *map);
-void		display_map(t_map *map, t_win *win);
+void		draw_map(t_map *map, t_win *win);
 t_p			iso_projection(t_p3d *p3d);
 t_p3d		*next_map_element(t_map *map, int column, int line);
 void		draw_line(t_p a, t_p b, t_win *win);
@@ -84,11 +84,13 @@ void		put_pixel(t_p p, t_win *win, t_data *data, int color);
 t_p			get_win_center(t_win *win);
 t_p			get_offset(t_p win_center, t_p map_iso_center);
 t_p			add_points(t_p p1, t_p p2);
-int			close_window(t_win *win);
+void		close_window(t_win *win);
 void		freemap(t_map *map);
 t_p3d		get_map_center(t_map *map);
 void		compute_map_coords(t_map *map, int spacing, float height_factor);
 t_win		*win_init(int height, int width, char *window_title);
 int			malloc_map(t_map *map, int width);
+void		draw_bg(t_win *win, int color);
+int			key_hook(int keycode, t_win *win);
 
 #endif
