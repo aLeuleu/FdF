@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:45:25 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/24 01:06:17 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/24 02:00:46 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	get_map(const char *map_file, t_map *map)
 	parse_map(fd, map);
 	close(fd);
 	map->scale = 1;
-	map->height_factor = -1;
+	map->height_factor = -7;
 	return ((map->map) != 0);
 }
 
