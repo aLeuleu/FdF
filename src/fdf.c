@@ -21,7 +21,6 @@ int	main(int argc, char **argv)
 		ft_printf("Bonus features enabled\n");
 	if (argc != 2 || !get_map(argv[1], &map))
 		return (-1);
-	ft_printf("\n\n\n");
 	win = win_init(WIN_HEIGHT, WIN_WIDTH, "fdf");
 	if (!win)
 	{
