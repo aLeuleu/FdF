@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:34:07 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/24 17:36:44 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/24 18:26:11 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	free_if_exist(void *ptr);
 
-void	close_window(t_win *win)
+int	close_window(t_win *win)
 {
 	if (win->img.img)
 		mlx_destroy_image(win->mlx, win->img.img);
