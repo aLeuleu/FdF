@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 20:58:31 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/25 18:46:18 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/25 23:50:09 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	malloc_map(t_map *map, int height, int width)
 	int	j;
 
 	i = 0;
-	map->map = ft_calloc(sizeof(t_p3d *), height);
+	map->map = ft_calloc(sizeof(t_p3d *), height + 1);
 	if (!map->map)
 		return (0);
 	while (i < height)
