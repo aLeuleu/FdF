@@ -14,24 +14,17 @@
 
 int	main(int argc, char **argv)
 {
-	t_win	*win;
-	t_map	map;
+	t_win	win;
 
 	if (BONUS)
 		ft_printf("Bonus features enabled\n");
-	if (argc != 2 || !get_map(argv[1], &map))
+	if (argc != 2 || !get_map(argv[1], &win))
 		return (-1);
-	win = win_init(WIN_HEIGHT, WIN_WIDTH, "fdf");
-	if (!win)
-	{
-		freemap(&map);
-		exit (0);
-	}
-	win->map = &map;
-	draw_map(&map, win);
-	mlx_put_image_to_window(win->mlx, win->win, win->img.img, 0, 0);
-	mlx_hook(win->win, CLOSE_WINDOW_EVENT, 0, close_window, win);
-	mlx_key_hook(win->win, key_hook, win);
-	mlx_loop(win->mlx);
+	win_init(WIN_HEIGHT, WIN_WIDTH, "fdf", &win);
+	draw_map(&win);
+	mlx_put_image_to_window(win.mlx, win.win, win.img.img, 0, 0);
+	mlx_hook(win.win, CLOSE_WINDOW_EVENT, 0, close_window, &win);
+	mlx_key_hook(win.win, key_hook, &win);
+	mlx_loop(win.mlx);
 	return (0);
 }

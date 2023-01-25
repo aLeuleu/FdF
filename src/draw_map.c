@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 16:01:22 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/24 18:09:59 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/25 17:13:54 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void		draw_map_line(t_map *map, int line, t_win *win, t_p offset);
 static void		set_spacing(t_win *win, t_map *map, int *spacing, float scale);
 
-void	draw_map(t_map *map, t_win *win)
+void	draw_map(t_win *win)
 {
 	int		i;
 	int		spacing;
@@ -23,12 +23,12 @@ void	draw_map(t_map *map, t_win *win)
 	t_p		offset;
 
 	i = 0;
-	set_spacing(win, map, &spacing, map->scale);
-	compute_map_coords(map, spacing, map->height_factor);
-	map_center = get_map_center(map);
+	set_spacing(win, &win->map, &spacing, win->map.scale);
+	compute_map_coords(&win->map, spacing, win->map.height_factor);
+	map_center = get_map_center(&win->map);
 	offset = get_offset(get_win_center(win), iso_projection(&map_center));
-	while (i < map->line)
-		draw_map_line(map, i++, win, offset);
+	while (i < win->map.line)
+		draw_map_line(&win->map, i++, win, offset);
 }
 
 static void	draw_map_line(t_map *map, int line, t_win *win, t_p offset)

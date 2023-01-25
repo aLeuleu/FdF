@@ -6,32 +6,27 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 18:57:00 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/24 18:10:19 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/25 18:51:41 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_win	*win_init(int height, int width, char *window_title)
+void	win_init(int height, int width, char *window_title, t_win *win)
 {
-	t_win	*res;
-
-	res = ft_calloc(sizeof(t_win), 1);
-	if (!res)
-		return (NULL);
-	res->mlx = mlx_init();
-	if (!res->mlx)
-		return (free(res), NULL);
-	res->win = mlx_new_window(res->mlx, width, height, window_title);
-	res->img.img = mlx_new_image(res->mlx, width, height);
-	if (!res->img.img)
-		exit (0);
-	res->img.addr = mlx_get_data_addr(res->img.img, &res->img.bits_per_pixel,
-			&res->img.line_length, &res->img.endian);
-	if (!res->win || !res->img.addr)
-		exit (0);
-	res->img.bits_per_pixel /= 8;
-	res->width = width;
-	res->height = height;
-	return (res);
+	win->mlx = mlx_init();
+	if (!win->mlx)
+		return (freemap(&win->map), exit(EXIT_FAILURE));
+	win->win = mlx_new_window(win->mlx, width, height, window_title);
+	if (!win->win)
+		return (freemap(&win->map), exit(EXIT_FAILURE));
+	win->img.img = mlx_new_image(win->mlx, width, height);
+	if (!win->img.img)
+		return (freemap(&win->map), mlx_destroy_window(win->mlx, win->win), \
+		exit(EXIT_FAILURE));
+	win->img.addr = mlx_get_data_addr(win->img.img, &win->img.bits_per_pixel,
+			&win->img.line_length, &win->img.endian);
+	win->img.bits_per_pixel /= 8;
+	win->width = width;
+	win->height = height;
 }

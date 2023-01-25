@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:45:25 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/24 13:17:52 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/25 18:46:43 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void		cpy_splits_into_map_line(char **splits, t_map *map, int height);
 static void		parse_map(int fd, t_map *map);
-static void		file_to_str_list(int fd, t_list *list);
+static int		file_to_str_list(int fd, t_list *list);
 static int		lst_to_map(t_list *list, t_map *map);
 
-int	get_map(const char *map_file, t_map *map)
+int	get_map(const char *map_file, t_win *win)
 {
 	int		fd;
 
@@ -27,25 +27,32 @@ int	get_map(const char *map_file, t_map *map)
 		ft_printf("Could not open file %s : %s\n", map_file, strerror(errno));
 		return (0);
 	}
-	parse_map(fd, map);
+	parse_map(fd, &win->map);
+	ft_printf("map parsed\n");
 	close(fd);
-	map->scale = 1;
-	map->height_factor = -7;
-	return ((map->map) != 0);
+	win->map.scale = 1;
+	win->map.height_factor = -7;
+	return ((win->map.map) != 0);
 }
 
 static void	parse_map(int fd, t_map *map)
 {
+	int		line;
 	int		columns;
 	t_list	list;
 
-	list.content = 0;
 	list.next = 0;
-	file_to_str_list(fd, &list);
-	map->line = ft_lstsize(&list);
+	list.content = get_next_line(fd);
+	if (!list.content)
+		return (close(fd), exit(EXIT_FAILURE));
+	if (file_to_str_list(fd, &list) == EXIT_FAILURE)
+		return (ft_lstclear(&list.next, free), close(fd), free(list.content), \
+		exit(EXIT_FAILURE));
+	line = ft_lstsize(&list);
 	columns = how_many_splits((char *)list.content, ' ', NULL);
-	if (!malloc_map(map, columns))
-		return (ft_lstclear(&list.next, free), free(list.content));
+	if (!malloc_map(map, line, columns))
+		return (close(fd), ft_lstclear(&list.next, free), free(list.content), \
+		exit(EXIT_FAILURE));
 	if (!lst_to_map(&list, map))
 		freemap(map);
 	ft_lstclear(&list.next, free);
@@ -65,16 +72,9 @@ static int	lst_to_map(t_list *list, t_map *map)
 		splits_by_spaces = ft_split((char *)next->content, ' ');
 		if (!splits_by_spaces)
 			return (0);
-		if (map->column != ft_tablen((void **)splits_by_spaces))
-		{
-			ft_printf("line : %d -> %d columns\n", map->line - 1, map->column);
-			ft_printf("line : %d -> %d columns\n", map->line, \
-			ft_tablen((void **)splits_by_spaces));
-			return (ft_freetab((void **)splits_by_spaces, \
-			ft_tablen((void **)splits_by_spaces) - 1), 0);
-		}
 		cpy_splits_into_map_line(splits_by_spaces, map, height);
-		ft_freetab((void **)splits_by_spaces, map->column - 1);
+		ft_freetab((void **)splits_by_spaces, \
+		ft_tablen((void **)splits_by_spaces) - 1);
 		height++;
 		next = next->next;
 	}
@@ -99,16 +99,20 @@ static void	cpy_splits_into_map_line(char **splits, t_map *map, int height)
 	}
 }
 
-static void	file_to_str_list(int fd, t_list *list)
+static int	file_to_str_list(int fd, t_list *list)
 {
 	char	*next_line;
+	t_list	*last_element;
 
-	next_line = get_next_line(fd);
-	list->content = next_line;
+	last_element = list;
 	next_line = get_next_line(fd);
 	while (next_line)
 	{
 		ft_lstadd_back(&list, ft_lstnew((void *)next_line));
+		if (!last_element->next)
+			return (EXIT_FAILURE);
+		last_element = last_element->next;
 		next_line = get_next_line(fd);
 	}
+	return (EXIT_SUCCESS);
 }

@@ -52,7 +52,7 @@ endif
 OBJ = $(addprefix obj/,$(SRC:.c=.o))
 OBJ_BONUS = $(addprefix bonus/obj_bonus/,$(SRC:.c=.o))
 
-FSAN = #-fsanitize=address
+FSAN =# -fsanitize=address
 
 all	: create_obj_folder
 	make -C libft
