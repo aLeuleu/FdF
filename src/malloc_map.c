@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 20:58:31 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/24 18:17:43 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/25 13:15:44 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	malloc_map(t_map *map, int width)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	map->map = ft_calloc(sizeof(t_p3d *), map->line);
@@ -25,6 +26,9 @@ int	malloc_map(t_map *map, int width)
 		map->map[i] = ft_calloc(sizeof(t_p3d), width);
 		if (!map->map[i])
 			return (ft_freetab((void **)(map->map), i), 0);
+		j = 0;
+		while(j < width)
+			map->map[i][j++].color = 0;
 		i++;
 	}
 	map->column = width;
