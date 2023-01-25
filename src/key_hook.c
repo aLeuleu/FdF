@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:09:37 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/25 21:23:20 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/25 23:55:10 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	key_hook(int keycode, t_win *win)
 		win->map.height_factor = 1.2;
 	if (keycode == KEY_X)
 		win->map.height_factor = 0.8;
-	draw_bg(win, 0);
+	blackscreen(win);
 	draw_map(win);
 	mlx_put_image_to_window(win->mlx, win->win, win->img.img, 0, 0);
 	win->map.height_factor = 1;

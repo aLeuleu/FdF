@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 06:15:40 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/25 17:42:19 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/25 23:54:56 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_p {
 t_p			add_points(t_p p1, t_p p2);
 int			close_window(t_win *win);
 void		compute_map_coords(t_map *map, int spacing, float height_factor);
-void		draw_bg(t_win *win, int color);
+void		blackscreen(t_win *win);
 void		draw_line(t_p a, t_p b, t_win *win);
 void		draw_map(t_win *win);
 int			get_map(const char *map_file, t_win *win);

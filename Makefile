@@ -31,7 +31,7 @@ SRC =	add_points.c \
 		draw_line.c \
 		put_pixel.c \
 		win_init.c \
-		draw_bg.c \
+		blackscreen.c \
 		key_hook.c \
 
 FLAGS = -Wall -Wextra -Werror	
