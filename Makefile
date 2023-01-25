@@ -34,7 +34,7 @@ SRC =	add_points.c \
 		draw_bg.c \
 		key_hook.c \
 
-FLAGS =# -Wall -Wextra -Werror	
+FLAGS = -Wall -Wextra -Werror	
 
 BONUS_FLAG = -DBONUS_FLAG
 
