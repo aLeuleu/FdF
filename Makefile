@@ -67,7 +67,7 @@ $(NAME): libft/libft.a $(OBJ) $(HEADER)
 $(NAME)_bonus: libft/libft.a $(OBJ_BONUS) $(HEADER)
 	cc $(OBJ_BONUS) $(FSAN) $(MLX_FLAGS) -g3  -L ./libft -lft -lm -o $(NAME)_bonus
 
-bonus/obj_bonus/%.o : bonus/src_bonus/%.c $(HEADER) Makefile
+bonus/obj_bonus/%.o : src/%.c $(HEADER) Makefile
 				cc -c -g3 ${FLAGS} $(FSAN) $(BONUS_FLAG) $< -o $@ -I $(MLX) -I.
 
 obj/%.o : src/%.c $(HEADER) Makefile
