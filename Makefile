@@ -75,6 +75,8 @@ obj/%.o : src/%.c $(HEADER) Makefile
 
 create_obj_folder :
 	mkdir -p obj
+	mkdir -p bonus
+	mkdir -p bonus/obj_bonus
 
 clean:
 	rm -f $(OBJ)

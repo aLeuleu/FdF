@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 18:55:23 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/25 17:12:27 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/25 21:16:04 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	compute_map_coords(t_map *map, int spacing, float height_factor)
 {
 	int		line;
 	int		column;
-	float	z;
 
 	line = 0;
 	while (line < map->line)
@@ -26,7 +25,6 @@ void	compute_map_coords(t_map *map, int spacing, float height_factor)
 		{
 			map->map[line][column].x = (column * spacing);
 			map->map[line][column].y = line * spacing;
-			z = map->map[line][column].z;
 			map->map[line][column].z *= height_factor;
 			if (map->map[line][column].z > 0)
 				map->map[line][column].z *= -1;
