@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 12:47:32 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/25 19:29:45 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/26 20:46:49 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include "get_next_line.h"
+# include "matrix.h"
 # include <limits.h>
 # include <stdarg.h>
 # include <stdint.h>
@@ -105,7 +106,7 @@ int			ft_tablen(void **tab);
 int			ft_hextoi(const char *a);
 void		log_condition(int condition, char *msg, const char *fctn, int line);
 int			skip_whitespace(const char *a);
-int			ft_hextoi(const char *a);
 int			is_plus_or_minus(char c);
+int			ft_hextoi(const char *a);
 
 #endif

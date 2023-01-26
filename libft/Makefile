@@ -6,7 +6,7 @@
 #    By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 20:55:17 by alevra            #+#    #+#              #
-#    Updated: 2023/01/25 18:55:36 by alevra           ###   ########lyon.fr    #
+#    Updated: 2023/01/26 18:13:08 by alevra           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,7 @@ SRC =	ft_memset.c			\
 		ft_tablen.c			\
 		log_condition.c		\
 		ft_hextoi.c			\
+		mat_utils.c			\
 
 OBJ = $(addprefix obj/,$(SRC:.c=.o))
 

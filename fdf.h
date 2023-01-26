@@ -6,10 +6,11 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 06:15:40 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/26 16:11:05 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/26 21:55:33 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h> //debug
 #ifndef FDF_H
 # define FDF_H
 # ifndef BONUS_FLAG
@@ -22,6 +23,11 @@
 # endif
 # ifndef WIN_HEIGHT
 #  define WIN_HEIGHT 1500
+# endif
+# ifndef MATH_MACRO
+#  define SQRT2_DIV_2 0.7071
+#  define ONE_DIV_SQRT6 0.4082
+#  define SQRT_2DIV3 0.8164
 # endif
 # define KEY_A 0
 # define KEY_S 1
@@ -66,6 +72,12 @@
 # define KEY_ESC 53
 # define KEY_PLUS 69
 # define KEY_MINUS 78
+# define KEY_NUMPAD_SEVEN 89
+# define KEY_NUMPAD_EIGHT 91
+# define KEY_NUMPAD_FOUR 86
+# define KEY_NUMPAD_FIVE 87
+# define KEY_NUMPAD_ONE 83
+# define KEY_NUMPAD_TWO 84
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 # define KEY_DOWN 125
@@ -79,19 +91,6 @@
 # include <math.h>
 # include <errno.h>
 # include <string.h>
-
-typedef struct s_p {
-	int		x;
-	int		y;
-	int		color;
-}				t_p;
-
-typedef struct s_p3d {
-	int		x;
-	int		y;
-	int		z;
-	int		color;
-}				t_p3d;
 
 typedef struct s_data {
 	void	*img;
@@ -109,6 +108,9 @@ typedef struct s_map {
 	float	height_factor;
 	t_p		translation;
 	t_p		offset_center;
+	double	α;
+	double	ß;
+	double	Γ;
 	int		need_to_compute;
 }				t_map;
 
@@ -129,7 +131,7 @@ void		blackscreen(t_win *win);
 void		draw_line(t_p a, t_p b, t_win *win);
 void		draw_map(t_win *win);
 int			get_map(const char *map_file, t_win *win);
-t_p			iso_projection(t_p3d *p3d);
+t_p			iso_projection(t_p3d *p3d, double α, double ß, double  Γ);
 t_p3d		*next_map_element(t_map *map, int column, int line);
 void		put_pixel(t_p p, t_win *win, t_data *data, int color);
 t_p			get_win_center(t_win *win);

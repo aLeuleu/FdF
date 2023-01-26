@@ -1,40 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoll.c                                         :+:      :+:    :+:   */
+/*   matrix.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/24 18:52:37 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/26 18:12:09 by alevra           ###   ########lyon.fr   */
+/*   Created: 2023/01/26 16:54:51 by alevra            #+#    #+#             */
+/*   Updated: 2023/01/26 21:03:34 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef MATRIX_H
+# define MATRIX_H
 
-long long	ft_atoll(const char *a)
+# include "libft.h"
+
+typedef struct s_vector
 {
-	long long	res;
-	size_t		i;
-	int			sign;
+	double	la;
+	double	lb;
+	double	lc;
+}	t_vec;
 
-	res = 0;
-	i = skip_whitespace(a);
-	sign = 1;
-	if (is_plus_or_minus(a[i]) && is_plus_or_minus(a[i + 1]))
-		return (0);
-	if (a[i] == '-')
-	{
-		sign = -1;
-		i++;
-	}
-	if (a[i] == '+')
-		i++;
-	while ((int)ft_isdigit(a[i]))
-	{
-		res = (res * 10) + a[i] - '0';
-		i++;
-	}
-	res *= sign;
-	return (res);
-}
+typedef struct s_matrix
+{
+	t_vec	ca;
+	t_vec	cb;
+	t_vec	cc;
+}	t_mat;
+
+typedef struct s_p {
+	int		x;
+	int		y;
+	int		color;
+}				t_p;
+
+typedef struct s_p3d {
+	int		x;
+	int		y;
+	int		z;
+	int		color;
+}				t_p3d;
+
+t_vec	mult_mat(t_mat mat, t_vec vec);
+void	show_vect(t_vec vec);
+
+#endif
