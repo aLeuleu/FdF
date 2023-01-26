@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 06:15:40 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/26 21:55:33 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/26 22:33:12 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,5 +141,7 @@ t_p3d		get_map_center(t_map *map);
 void		win_init(int height, int width, char *window_title, t_win *win);
 int			malloc_map(t_map *map, int line, int width);
 int			key_hook(int keycode, t_win *win);
+void		draw_cross(t_p p, int l, t_win *win); //debug
+
 
 #endif

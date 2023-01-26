@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 16:01:22 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/26 22:16:15 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/26 22:34:01 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	draw_map(t_win *win)
 	t_p		offset;
 
 	i = 0;
+	draw_cross((t_p){0, 0, 0}, 10, win);
 	set_spacing(win, &win->map, &spacing, win->map.scale);
 	offset = (t_p){0, 0, 0};
 	if (win->map.need_to_compute)
