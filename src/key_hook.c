@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:09:37 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/25 23:55:10 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/26 03:08:35 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,15 @@ int	key_hook(int keycode, t_win *win)
 	if (!BONUS)
 		return (0);
 	if (keycode == KEY_PLUS && win->map.scale < 5)
+	{
 		win->map.scale *= 1.2;
+		win->map.height_factor = 1.2;
+	}
 	if (keycode == KEY_MINUS && win->map.scale > 0.4)
+	{
 		win->map.scale *= 0.8;
+		win->map.height_factor = 0.8;
+	}
 	if (keycode == KEY_Z)
 		win->map.height_factor = 1.2;
 	if (keycode == KEY_X)
