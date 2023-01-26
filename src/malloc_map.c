@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 20:58:31 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/26 21:49:21 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/26 23:45:36 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	malloc_map(t_map *map, int height, int width)
 	map->line = height;
 	map->translation = (t_p){0, 0, 0};
 	map->need_to_compute = 1;
-	map->α = 0;
-	map->ß = 0;
-	map->Γ = 0;
+	map->alpha = 0;
+	map->beta = 0;
+	map->gamma = 0;
 	return (1);
 }

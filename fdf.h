@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 06:15:40 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/26 22:33:12 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/27 00:37:11 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 #  define BONUS 1
 # endif
 # ifndef WIN_WIDTH
-#  define WIN_WIDTH 2560
+#  define WIN_WIDTH 1280
 # endif
 # ifndef WIN_HEIGHT
-#  define WIN_HEIGHT 1500
+#  define WIN_HEIGHT 750
 # endif
 # ifndef MATH_MACRO
 #  define SQRT2_DIV_2 0.7071
@@ -108,9 +108,9 @@ typedef struct s_map {
 	float	height_factor;
 	t_p		translation;
 	t_p		offset_center;
-	double	α;
-	double	ß;
-	double	Γ;
+	double	alpha;
+	double	beta;
+	double	gamma;
 	int		need_to_compute;
 }				t_map;
 
@@ -123,7 +123,6 @@ typedef struct s_win {
 	int		height;
 }				t_win;
 
-
 t_p			add_points(t_p p1, t_p p2);
 int			close_window(t_win *win);
 void		compute_map_coords(t_map *map, int spacing, float height_factor);
@@ -131,7 +130,7 @@ void		blackscreen(t_win *win);
 void		draw_line(t_p a, t_p b, t_win *win);
 void		draw_map(t_win *win);
 int			get_map(const char *map_file, t_win *win);
-t_p			iso_projection(t_p3d *p3d, double α, double ß, double  Γ);
+void		iso_projection(t_p3d *p3d, t_map *map, t_p offset_center, t_p *res);
 t_p3d		*next_map_element(t_map *map, int column, int line);
 void		put_pixel(t_p p, t_win *win, t_data *data, int color);
 t_p			get_win_center(t_win *win);

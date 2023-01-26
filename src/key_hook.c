@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:09:37 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/26 22:06:29 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/27 00:08:14 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int	key_hook(int keycode, t_win *win)
 		close_window(win);
 	if (!BONUS)
 		return (0);
-	if (keycode == KEY_PLUS && win->map.scale < 5)
+	if (keycode == KEY_PLUS && win->map.scale < 10)
 	{
 		win->map.scale *= 1.2;
 		win->map.height_factor = 1.2;
 		win->map.need_to_compute = 1;
 	}
-	if (keycode == KEY_MINUS && win->map.scale > 0.4)
+	if (keycode == KEY_MINUS && win->map.scale > 0.1)
 	{
 		win->map.scale *= 0.8;
 		win->map.height_factor = 0.8;
@@ -50,35 +50,35 @@ int	key_hook(int keycode, t_win *win)
 	if (keycode == KEY_UP)
 	{
 		win->map.height_factor = 1;
-		win->map.translation = add_points(win->map.translation, (t_p){0, -10, 0});
+		win->map.translation = add_points(win->map.translation, (t_p){0, -13, 0});
 	}
 	if (keycode == KEY_DOWN)
 	{
 		win->map.height_factor = 1;
-		win->map.translation = add_points(win->map.translation, (t_p){0, 10, 0});
+		win->map.translation = add_points(win->map.translation, (t_p){0, 13, 0});
 	}
 	if (keycode == KEY_RIGHT)
 	{
 		win->map.height_factor = 1;
-		win->map.translation = add_points(win->map.translation, (t_p){10, 0, 0});
+		win->map.translation = add_points(win->map.translation, (t_p){13, 0, 0});
 	}
 	if (keycode == KEY_LEFT)
 	{
 		win->map.height_factor = 1;
-		win->map.translation = add_points(win->map.translation, (t_p){-10, 0, 0});
+		win->map.translation = add_points(win->map.translation, (t_p){-13, 0, 0});
 	}
 	if (keycode == KEY_NUMPAD_SEVEN)
-		win->map.α += 0.05;
+		win->map.alpha += 0.005;
 	if (keycode == KEY_NUMPAD_EIGHT)
-		win->map.α -= 0.05;
-	if (keycode == KEY_NUMPAD_FOUR) 
-		win->map.ß += 0.05;
+		win->map.alpha -= 0.005;
+	if (keycode == KEY_NUMPAD_FOUR)
+		win->map.beta += 0.005;
 	if (keycode == KEY_NUMPAD_FIVE)
-		win->map.ß -= 0.05;
+		win->map.beta -= 0.005;
 	if (keycode == KEY_NUMPAD_ONE)
-		win->map.Γ += 0.05;
+		win->map.gamma += 0.005;
 	if (keycode == KEY_NUMPAD_TWO)
-		win->map.Γ -= 0.05;
+		win->map.gamma -= 0.005;
 	refresh(win);
 	return (0);
 }	
@@ -97,9 +97,9 @@ static int	keycode_is_valid(int keycode, t_win *win)
 		return (1);
 	if (!BONUS)
 		return (0);
-	if (keycode == KEY_PLUS && win->map.scale < 5)
+	if (keycode == KEY_PLUS && win->map.scale < 10)
 		return (1);
-	if (keycode == KEY_MINUS && win->map.scale > 0.4)
+	if (keycode == KEY_MINUS && win->map.scale > 0.1)
 		return (1);
 	if (keycode == KEY_Z)
 		return (1);
