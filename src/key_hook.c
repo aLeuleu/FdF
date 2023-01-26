@@ -6,13 +6,15 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 13:09:37 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/26 03:08:35 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/26 16:34:13 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 static int	keycode_is_valid(int keycode, t_win *win);
+static void	refresh(t_win *win);
+static int	is_arrow_key(int keycode);
 
 int	key_hook(int keycode, t_win *win)
 {
@@ -26,22 +28,54 @@ int	key_hook(int keycode, t_win *win)
 	{
 		win->map.scale *= 1.2;
 		win->map.height_factor = 1.2;
+		win->map.need_to_compute = 1;
 	}
 	if (keycode == KEY_MINUS && win->map.scale > 0.4)
 	{
 		win->map.scale *= 0.8;
 		win->map.height_factor = 0.8;
+		win->map.need_to_compute = 1;
 	}
 	if (keycode == KEY_Z)
+	{
+		win->map.need_to_compute = 1;
 		win->map.height_factor = 1.2;
+	}
 	if (keycode == KEY_X)
+	{
+		win->map.need_to_compute = 1;
 		win->map.height_factor = 0.8;
+	}
+	if (keycode == KEY_UP)
+	{
+		win->map.height_factor = 1;
+		win->map.translation = add_points(win->map.translation, (t_p){0, -10, 0});
+	}
+	if (keycode == KEY_DOWN)
+	{
+		win->map.height_factor = 1;
+		win->map.translation = add_points(win->map.translation, (t_p){0, 10, 0});
+	}
+	if (keycode == KEY_RIGHT)
+	{
+		win->map.height_factor = 1;
+		win->map.translation = add_points(win->map.translation, (t_p){10, 0, 0});
+	}
+	if (keycode == KEY_LEFT)
+	{
+		win->map.height_factor = 1;
+		win->map.translation = add_points(win->map.translation, (t_p){-10, 0, 0});
+	}
+	refresh(win);
+	return (0);
+}	
+
+static void	refresh(t_win *win)
+{
 	blackscreen(win);
 	draw_map(win);
 	mlx_put_image_to_window(win->mlx, win->win, win->img.img, 0, 0);
 	win->map.height_factor = 1;
-	win->map.height_factor = 1;
-	return (0);
 }
 
 static int	keycode_is_valid(int keycode, t_win *win)
@@ -58,5 +92,15 @@ static int	keycode_is_valid(int keycode, t_win *win)
 		return (1);
 	if (keycode == KEY_X)
 		return (1);
+	if (is_arrow_key(keycode))
+		return (1);
 	return (0);
+}
+
+static int	is_arrow_key(int keycode)
+{
+	return (keycode == KEY_UP \
+	|| keycode == KEY_DOWN \
+	|| keycode == KEY_RIGHT \
+	|| keycode == KEY_LEFT);
 }

@@ -62,13 +62,13 @@ all	: create_obj_folder
 	@make end_message
 
 $(NAME): libft/libft.a $(OBJ) $(HEADER)
-	cc $(OBJ) $(FSAN) $(MLX_FLAGS) -g3  -L ./libft -lft -lm -o $(NAME)
+	cc $(OBJ) $(FSAN) $(MLX_FLAGS) -g3 -O3 -L ./libft -lft -lm -o $(NAME)
 
 $(NAME)_bonus: libft/libft.a $(OBJ_BONUS) $(HEADER)
 	cc $(OBJ_BONUS) $(FSAN) $(MLX_FLAGS) -g3  -L ./libft -lft -lm -o $(NAME)_bonus
 
 bonus/obj_bonus/%.o : src/%.c $(HEADER) Makefile
-				cc -c -g3 ${FLAGS} $(FSAN) $(BONUS_FLAG) $< -o $@ -I $(MLX) -I.
+				cc -c -g3 -O3 ${FLAGS} $(FSAN) $(BONUS_FLAG) $< -o $@ -I $(MLX) -I.
 
 obj/%.o : src/%.c $(HEADER) Makefile
 		cc -c -g3 ${FLAGS} $(FSAN) $< -o $@ -I $(MLX) -I.
