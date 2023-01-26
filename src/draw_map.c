@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 16:01:22 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/26 21:54:04 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/26 22:16:15 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void		draw_map_line(t_map *map, int line, t_win *win, t_p offset);
 static void		set_spacing(t_win *win, t_map *map, int *spacing, float scale);
+void	apply_offset_center(t_map *map);
 
 void	draw_map(t_win *win)
 {
@@ -31,11 +32,12 @@ void	draw_map(t_win *win)
 		map_center = get_map_center(&win->map);
 		win->map.offset_center = \
 		get_offset(get_win_center(win), iso_projection(&map_center, 0, 0, 0));
+		apply_offset_center(&win->map);
 	}
 	win->map.need_to_compute = 0;
-	offset = add_points(win->map.offset_center, win->map.translation);
+	// offset = add_points(win->map.offset_center, win->map.translation);
 	while (i < win->map.line)
-		draw_map_line(&win->map, i++, win, offset);
+		draw_map_line(&win->map, i++, win, win->map.translation);
 }
 
 static void	draw_map_line(t_map *map, int line, t_win *win, t_p offset)
@@ -69,4 +71,23 @@ static void	set_spacing(t_win *win, t_map *map, int *spacing, float scale)
 	*spacing = ft_min(win->height, win->width)
 		/ ft_max(map->line, map->column);
 	*spacing *= scale;
+}
+
+void	apply_offset_center(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < map->line)
+	{
+		j = 0;
+		while (j < map->column)
+		{
+			map->map[i][j].x -= map->offset_center.x;
+			map->map[i][j].y -= map->offset_center.y;
+			j++;
+		}
+		i++;
+	}
 }
