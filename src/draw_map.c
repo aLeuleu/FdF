@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 16:01:22 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/27 00:19:06 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/27 01:05:38 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static void		draw_map_line(t_map *map, int line, t_win *win, t_p offset);
 static void		set_spacing(t_win *win, t_map *map, int *spacing, float scale);
-void	apply_offset_center(t_map *map);
+void			apply_offset_center(t_map *map);
 
 void	draw_map(t_win *win)
 {
 	int		i;
 	int		spacing;
 	t_p3d	map_center;
-
+	t_p		iso_map_center;
 
 	i = 0;
 	set_spacing(win, &win->map, &spacing, win->map.scale);
@@ -29,8 +29,9 @@ void	draw_map(t_win *win)
 	{
 		compute_map_coords(&win->map, spacing, win->map.height_factor);
 		map_center = get_map_center(&win->map);
+		iso_projection(&map_center, &win->map, (t_p){0, 0, 0}, &iso_map_center);
 		win->map.offset_center = \
-		get_offset(get_win_center(win), iso_projection(&map_center, 0, 0, 0, (t_p){0, 0, 0}));
+		get_offset(get_win_center(win), iso_map_center);
 		apply_offset_center(&win->map);
 	}
 	win->map.need_to_compute = 0;
@@ -38,31 +39,32 @@ void	draw_map(t_win *win)
 		draw_map_line(&win->map, i++, win, win->map.translation);
 }
 
-//apres, on veut que la map soit au centre de l'ecran
-
+/* 
+	p[0] : p;
+	p[1] : p_next_col;
+	p[2] : p_next_line;
+ */
 static void	draw_map_line(t_map *map, int line, t_win *win, t_p offset)
 {
 	int	i;
-	t_p	p;
-	t_p	p_next_col;
-	t_p	p_next_line;
+	t_p	p[3];
 	t_p	win_center;
 
 	win_center = get_win_center(win);
 	i = 0;
 	while (i < map->column)
 	{
-		p = iso_projection(&(map->map[line][i]), map, win_center);
-		p_next_col = iso_projection(next_map_element(map, i, line), map, win_center);
-		p = add_points(p, offset);
-		p_next_col = add_points(p_next_col, offset);
+		iso_projection(&(map->map[line][i]), map, win_center, &p[0]);
+		p[0] = add_points(p[0], offset);
+		iso_projection(next_map_element(map, i, line), map, win_center, &p[1]);
+		p[1] = add_points(p[1], offset);
 		if (i != map->column - 1)
-			draw_line(p, p_next_col, win);
+			draw_line(p[0], p[1], win);
 		if (line != map->line - 1)
 		{
-			p_next_line = iso_projection(&(map->map[line + 1][i]), map, win_center);
-			p_next_line = add_points(p_next_line, offset);
-			draw_line(p, p_next_line, win);
+			iso_projection(&(map->map[line + 1][i]), map, win_center, &p[2]);
+			p[2] = add_points(p[2], offset);
+			draw_line(p[0], p[2], win);
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:45:25 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/27 00:04:40 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/27 01:25:54 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static void	cpy_splits_into_map_line(char **splits, t_map *map, int height)
 		z = map->map[height][i].z;
 		if (z < 10 && BONUS)
 		{	
-			map->map[height][i].color = 0xFFFFFF * z / 10;
+			map->map[height][i].color =0;
 
 		}
 		else
