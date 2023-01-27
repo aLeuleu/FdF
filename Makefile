@@ -34,6 +34,8 @@ SRC =	add_points.c \
 		blackscreen.c \
 		key_hook.c \
 		draw_cross.c \
+		hook_utils.c \
+		hook_utils2.c \
 
 FLAGS = -Wall -Wextra -Werror	
 

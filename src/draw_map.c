@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 16:01:22 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/27 01:05:38 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/27 16:11:21 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ static void	set_spacing(t_win *win, t_map *map, int *spacing, float scale)
 
 void	apply_offset_center(t_map *map)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	t_p3d	map_center;
 
 	map_center = get_map_center(map);

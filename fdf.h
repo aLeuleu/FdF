@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 06:15:40 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/27 01:05:09 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/27 16:19:11 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@
 # define KEY_MINUS 78
 # define KEY_NUMPAD_SEVEN 89
 # define KEY_NUMPAD_EIGHT 91
+# define KEY_F5 96
 # define KEY_NUMPAD_FOUR 86
 # define KEY_NUMPAD_FIVE 87
 # define KEY_NUMPAD_ONE 83
@@ -141,6 +142,15 @@ void		win_init(int height, int width, char *window_title, t_win *win);
 int			malloc_map(t_map *map, int line, int width);
 int			key_hook(int keycode, t_win *win);
 void		draw_cross(t_p p, int l, t_win *win); //debug
-
+int			is_zoom_allowed(t_win *win);
+int			is_zoom_key(int keycode);
+int			is_altitude_key(int keycode);
+int			is_rot_key(int keycode);
+int			is_arrow_key(int keycode);
+void		execute_zoom(int keycode, t_win *win);
+int			keycode_is_valid(int keycode, t_win *win);
+void		execute_altitude(int keycode, t_win *win);
+void		execute_rotation(int keycode, t_win *win);
+void		execute_translation(int keycode, t_win *win);
 
 #endif
