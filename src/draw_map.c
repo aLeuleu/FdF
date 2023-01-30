@@ -6,20 +6,21 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 16:01:22 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/27 16:11:21 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/30 12:09:11 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 static void		draw_map_line(t_map *map, int line, t_win *win, t_p offset);
-static void		set_spacing(t_win *win, t_map *map, int *spacing, float scale);
+static void		set_spacing(t_win *win, t_map *map, \
+float *spacing, float scale);
 void			apply_offset_center(t_map *map);
 
 void	draw_map(t_win *win)
 {
 	int		i;
-	int		spacing;
+	float	spacing;
 	t_p3d	map_center;
 	t_p		iso_map_center;
 
@@ -70,7 +71,7 @@ static void	draw_map_line(t_map *map, int line, t_win *win, t_p offset)
 	}
 }
 
-static void	set_spacing(t_win *win, t_map *map, int *spacing, float scale)
+static void	set_spacing(t_win *win, t_map *map, float *spacing, float scale)
 {
 	*spacing = ft_min(win->height, win->width)
 		/ ft_max(map->line, map->column);

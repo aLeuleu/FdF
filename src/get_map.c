@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:45:25 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/27 16:23:30 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/30 11:55:47 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	get_map(const char *map_file, t_win *win)
 	parse_map(fd, &win->map);
 	close(fd);
 	win->map.scale = 1;
-	win->map.height_factor = -7;
+	win->map.height_factor = -3;
 	return ((win->map.map) != 0);
 }
 
@@ -98,16 +98,11 @@ static void	cpy_splits_into_map_line(char **splits, t_map *map, int height)
 	{
 		map->map[height][i].z = ft_atoi(splits[i]);
 		z = map->map[height][i].z;
-		if (z < 10 && BONUS)
-			map->map[height][i].color = 0xa000a0;
+		coma = ft_strchr(splits[i], ',');
+		if (coma && BONUS)
+			map->map[height][i].color = ft_hextoi(coma + 3);
 		else
-		{
-			coma = ft_strchr(splits[i], ',');
-			if (coma && BONUS)
-				map->map[height][i].color = ft_hextoi(coma + 3);
-			else
-				map->map[height][i].color = 0xFFFFFF;
-		}
+			map->map[height][i].color = 0xFFFFFF;
 		i ++;
 	}
 }

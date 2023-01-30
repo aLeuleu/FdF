@@ -6,12 +6,12 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 06:15:40 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/27 16:19:11 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/30 11:59:51 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h> //debug
-#ifndef FDF_H
+# ifndef FDF_H
 # define FDF_H
 # ifndef BONUS_FLAG
 #  define BONUS 0
@@ -72,13 +72,16 @@
 # define KEY_ESC 53
 # define KEY_PLUS 69
 # define KEY_MINUS 78
-# define KEY_NUMPAD_SEVEN 89
-# define KEY_NUMPAD_EIGHT 91
+# define KEY_NUMPAD_1 83
+# define KEY_NUMPAD_2 84
+# define KEY_NUMPAD_3 85
+# define KEY_NUMPAD_4 86
+# define KEY_NUMPAD_5 87
+# define KEY_NUMPAD_6 88
+# define KEY_NUMPAD_7 89
+# define KEY_NUMPAD_8 91
+# define KEY_NUMPAD_9 92
 # define KEY_F5 96
-# define KEY_NUMPAD_FOUR 86
-# define KEY_NUMPAD_FIVE 87
-# define KEY_NUMPAD_ONE 83
-# define KEY_NUMPAD_TWO 84
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 # define KEY_DOWN 125
@@ -126,7 +129,7 @@ typedef struct s_win {
 
 t_p			add_points(t_p p1, t_p p2);
 int			close_window(t_win *win);
-void		compute_map_coords(t_map *map, int spacing, float height_factor);
+void		compute_map_coords(t_map *map, float spacing, float height_factor);
 void		blackscreen(t_win *win);
 void		draw_line(t_p a, t_p b, t_win *win);
 void		draw_map(t_win *win);
@@ -142,8 +145,7 @@ void		win_init(int height, int width, char *window_title, t_win *win);
 int			malloc_map(t_map *map, int line, int width);
 int			key_hook(int keycode, t_win *win);
 void		draw_cross(t_p p, int l, t_win *win); //debug
-int			is_zoom_allowed(t_win *win);
-int			is_zoom_key(int keycode);
+int			is_zoom_key(int keycode, t_win *win);
 int			is_altitude_key(int keycode);
 int			is_rot_key(int keycode);
 int			is_arrow_key(int keycode);

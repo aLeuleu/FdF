@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 16:15:52 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/27 16:21:52 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/30 12:04:15 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	key_hook(int keycode, t_win *win)
 	}
 	if (!BONUS)
 		return (0);
-	if (is_zoom_key(keycode) && is_zoom_allowed(win))
+	if (is_zoom_key(keycode, win))
 		execute_zoom(keycode, win);
 	if (is_altitude_key(keycode))
 		execute_altitude(keycode, win);
