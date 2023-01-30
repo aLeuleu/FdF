@@ -6,12 +6,11 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 06:15:40 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/30 11:59:51 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/30 12:21:31 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> //debug
-# ifndef FDF_H
+#ifndef FDF_H
 # define FDF_H
 # ifndef BONUS_FLAG
 #  define BONUS 0

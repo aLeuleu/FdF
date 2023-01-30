@@ -6,7 +6,7 @@
 /*   By: alevra <alevra@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:55:25 by alevra            #+#    #+#             */
-/*   Updated: 2023/01/26 21:03:47 by alevra           ###   ########lyon.fr   */
+/*   Updated: 2023/01/30 12:21:56 by alevra           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 t_vec	mult_mat(t_mat mat, t_vec vec)
 {
 	t_vec	res;
+
 	res.la = (mat.ca.la * vec.la) + (mat.ca.lb * vec.lb) + (mat.ca.lc * vec.lc);
 	res.lb = (mat.cb.la * vec.la) + (mat.cb.lb * vec.lb) + (mat.cb.lc * vec.lc);
 	res.lc = (mat.cc.la * vec.la) + (mat.cc.lb * vec.lb) + (mat.cc.lc * vec.lc);
